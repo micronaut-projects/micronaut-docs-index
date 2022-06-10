@@ -34,11 +34,9 @@ public class IndexRendererImpl implements IndexRenderer {
                              DocVersionRenderer docVersionRenderer,
     ApiVersionRenderer apiVersionRenderer) throws IOException {
         this.categoryRenderer = categoryRenderer;
-        InputStream inputStream = this.getClass()
+        this.template = Utils.readFromURL(this.getClass()
                 .getClassLoader()
-                .getResourceAsStream("index.html");
-        this.template = Utils.readFromInputStream(inputStream);
-        inputStream.close();
+                .getResource("index.html"));
         this.categoryFetcher = categoryFetcher;
         this.versionsFetcher = versionsFetcher;
         this.docVersionRenderer = docVersionRenderer;

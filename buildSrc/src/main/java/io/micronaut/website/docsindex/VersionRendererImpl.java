@@ -21,11 +21,9 @@ import java.io.InputStream;
 public abstract class VersionRendererImpl {
     private final String template;
     protected VersionRendererImpl(String name) throws IOException {
-        InputStream inputStream = this.getClass()
+        this.template = Utils.readFromURL(this.getClass()
                 .getClassLoader()
-                .getResourceAsStream(name);
-        this.template = Utils.readFromInputStream(inputStream);
-        inputStream.close();
+                .getResource(name));
     }
 
     public String renderAsHtml(String version) {

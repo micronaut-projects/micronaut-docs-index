@@ -24,11 +24,9 @@ public class CategoryRendererImpl implements CategoryRenderer {
     private final RepositoryRenderer repositoryRenderer;
     public CategoryRendererImpl(RepositoryRenderer repositoryRenderer) throws IOException {
         this.repositoryRenderer = repositoryRenderer;
-        InputStream inputStream = this.getClass()
+        this.template = Utils.readFromURL(this.getClass()
                 .getClassLoader()
-                .getResourceAsStream("category.html");
-        this.template = Utils.readFromInputStream(inputStream);
-        inputStream.close();
+                .getResource("category.html"));
     }
 
     @Override

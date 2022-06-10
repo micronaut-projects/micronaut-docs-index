@@ -21,11 +21,9 @@ import java.io.InputStream;
 public class RepositoryRenderImpl implements RepositoryRenderer {
     private final String template;
     public RepositoryRenderImpl() throws IOException {
-        InputStream inputStream = this.getClass()
+        this.template = Utils.readFromURL(this.getClass()
                 .getClassLoader()
-                .getResourceAsStream("repository.html");
-        this.template = Utils.readFromInputStream(inputStream);
-        inputStream.close();
+                .getResource("repository.html"));
     }
 
     @Override
