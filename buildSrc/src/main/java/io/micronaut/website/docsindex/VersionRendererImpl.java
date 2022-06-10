@@ -25,7 +25,7 @@ public abstract class VersionRendererImpl {
     protected VersionRendererImpl(String name) throws IOException {
         InputStream inputStream = this.getClass()
                 .getClassLoader()
-                .getResourceAsStream("api-option.html");
+                .getResourceAsStream(name);
         this.template = Utils.readFromInputStream(inputStream);
         inputStream.close();
     }
