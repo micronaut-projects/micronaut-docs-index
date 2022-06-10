@@ -15,10 +15,6 @@
  */
 package io.micronaut.website.docsindex;
 
-import io.micronaut.website.docsindex.Repository;
-import io.micronaut.website.docsindex.RepositoryRenderer;
-import io.micronaut.website.docsindex.Utils;
-
 import java.io.IOException;
 import java.io.InputStream;
 

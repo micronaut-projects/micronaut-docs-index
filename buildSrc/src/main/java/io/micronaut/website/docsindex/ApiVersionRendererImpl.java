@@ -15,9 +15,6 @@
  */
 package io.micronaut.website.docsindex;
 
-import io.micronaut.website.docsindex.ApiVersionRenderer;
-import io.micronaut.website.docsindex.VersionRendererImpl;
-
 import java.io.IOException;
 
 public class ApiVersionRendererImpl extends VersionRendererImpl implements ApiVersionRenderer {

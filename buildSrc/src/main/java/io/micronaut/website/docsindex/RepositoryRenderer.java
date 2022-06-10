@@ -15,8 +15,6 @@
  */
 package io.micronaut.website.docsindex;
 
-import io.micronaut.website.docsindex.Repository;
-
 @FunctionalInterface
 public interface RepositoryRenderer {
     String renderAsHtml(Repository repository);

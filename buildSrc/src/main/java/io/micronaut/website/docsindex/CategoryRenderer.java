@@ -15,8 +15,6 @@
  */
 package io.micronaut.website.docsindex;
 
-import io.micronaut.website.docsindex.Category;
-
 @FunctionalInterface
 public interface CategoryRenderer {
     String renderAsHtml(Category category);

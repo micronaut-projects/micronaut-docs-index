@@ -15,9 +15,6 @@
  */
 package io.micronaut.website.docsindex;
 
-import io.micronaut.website.docsindex.Category;
-import io.micronaut.website.docsindex.Type;
-
 import java.util.Optional;
 
 @FunctionalInterface

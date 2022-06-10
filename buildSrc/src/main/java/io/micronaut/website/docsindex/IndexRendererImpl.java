@@ -15,15 +15,6 @@
  */
 package io.micronaut.website.docsindex;
 
-import io.micronaut.website.docsindex.ApiVersionRenderer;
-import io.micronaut.website.docsindex.CategoryFetcher;
-import io.micronaut.website.docsindex.CategoryRenderer;
-import io.micronaut.website.docsindex.DocVersionRenderer;
-import io.micronaut.website.docsindex.IndexRenderer;
-import io.micronaut.website.docsindex.Type;
-import io.micronaut.website.docsindex.Utils;
-import io.micronaut.website.docsindex.VersionsFetcher;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;

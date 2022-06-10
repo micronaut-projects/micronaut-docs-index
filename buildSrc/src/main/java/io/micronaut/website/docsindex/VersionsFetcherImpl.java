@@ -15,7 +15,6 @@
  */
 package io.micronaut.website.docsindex;
 
-import io.micronaut.website.docsindex.VersionsFetcher;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;

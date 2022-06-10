@@ -15,8 +15,6 @@
  */
 package io.micronaut.website.docsindex;
 
-import io.micronaut.website.docsindex.Repository;
-
 public class RepositoryImpl implements Repository {
     private final String slug;
 

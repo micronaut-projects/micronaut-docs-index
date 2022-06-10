@@ -15,8 +15,6 @@
  */
 package io.micronaut.website.docsindex;
 
-import io.micronaut.website.docsindex.Repository;
-
 import java.util.List;
 
 public interface Category {
