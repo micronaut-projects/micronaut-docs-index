@@ -13,9 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.website;
+package io.micronaut.website.docsindex;
 
-@FunctionalInterface
-public interface RepositoryRenderer {
-    String renderAsHtml(Repository repository);
+import io.micronaut.website.docsindex.ApiVersionRenderer;
+import io.micronaut.website.docsindex.VersionRendererImpl;
+
+import java.io.IOException;
+
+public class ApiVersionRendererImpl extends VersionRendererImpl implements ApiVersionRenderer {
+    public ApiVersionRendererImpl() throws IOException {
+        super("api-option.html");
+    }
 }

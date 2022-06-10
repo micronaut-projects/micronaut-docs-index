@@ -13,8 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.website;
+package io.micronaut.website.gradle;
 
+import io.micronaut.website.docsindex.ApiVersionRendererImpl;
+import io.micronaut.website.docsindex.CategoryFetchImpl;
+import io.micronaut.website.docsindex.CategoryRendererImpl;
+import io.micronaut.website.docsindex.DocVersionRendererImpl;
+import io.micronaut.website.docsindex.IndexRenderer;
+import io.micronaut.website.docsindex.IndexRendererImpl;
+import io.micronaut.website.docsindex.RepositoryRenderImpl;
+import io.micronaut.website.docsindex.VersionsFetcherImpl;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;

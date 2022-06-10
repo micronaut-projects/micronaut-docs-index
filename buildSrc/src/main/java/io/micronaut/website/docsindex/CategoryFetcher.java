@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.website;
+package io.micronaut.website.docsindex;
 
-import java.io.IOException;
+import io.micronaut.website.docsindex.Category;
+import io.micronaut.website.docsindex.Type;
 
-public class DocVersionRendererImpl  extends VersionRendererImpl implements DocVersionRenderer {
-    public DocVersionRendererImpl() throws IOException {
-        super("doc-option.html");
-    }
+import java.util.Optional;
+
+@FunctionalInterface
+public interface CategoryFetcher {
+    Optional<Category> fetch(Type type);
 }

@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.website;
+
+package io.micronaut.website.docsindex;
 
 @FunctionalInterface
-public interface CategoryRenderer {
-    String renderAsHtml(Category category);
+public interface DocVersionRenderer {
+    String renderAsHtml(String version);
 }

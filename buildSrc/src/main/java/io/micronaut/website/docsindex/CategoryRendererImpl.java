@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.website;
+package io.micronaut.website.docsindex;
+
+import io.micronaut.website.docsindex.Category;
+import io.micronaut.website.docsindex.CategoryRenderer;
+import io.micronaut.website.docsindex.RepositoryRenderer;
+import io.micronaut.website.docsindex.Utils;
 
 import java.io.IOException;
 import java.io.InputStream;

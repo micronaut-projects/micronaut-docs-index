@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.website;
+package io.micronaut.website.docsindex;
 
-import java.util.Optional;
-
-@FunctionalInterface
-public interface CategoryFetcher {
-    Optional<Category> fetch(Type type);
+public interface Repository {
+    String getSlug();
+    String getTitle();
+    String getDescription();
+    boolean isSnapshot();
 }

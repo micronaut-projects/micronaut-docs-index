@@ -13,29 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.website;
+package io.micronaut.website.docsindex;
 
-public enum Type {
-    ANALYTICS("analytics"),
-    API("api"),
-    BUILD("build"),
-    CLOUD("cloud"),
-    DATA_ACCESS("data-access"),
-    DATABASE_MIGRATION("database-migration"),
-    LANGUAGES("languages"),
-    MESSAGING("messaging"),
-    MISC("misc"),
-    REACTIVE("reactive"),
-    VIEWS("views");
+import io.micronaut.website.docsindex.DocVersionRenderer;
+import io.micronaut.website.docsindex.VersionRendererImpl;
 
-    private final String value;
+import java.io.IOException;
 
-    Type(String value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return value;
+public class DocVersionRendererImpl  extends VersionRendererImpl implements DocVersionRenderer {
+    public DocVersionRendererImpl() throws IOException {
+        super("doc-option.html");
     }
 }

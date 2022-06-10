@@ -1,1 +1,1 @@
-apply<io.micronaut.website.MicronautWebsiteDocsIndexPlugin>()
+apply<io.micronaut.website.gradle.MicronautWebsiteDocsIndexPlugin>()

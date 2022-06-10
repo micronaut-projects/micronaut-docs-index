@@ -13,21 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.website;
+package io.micronaut.website.docsindex;
 
-import java.io.IOException;
-import java.io.InputStream;
+import io.micronaut.website.docsindex.Repository;
 
-public abstract class VersionRendererImpl {
-    private final String template;
-    protected VersionRendererImpl(String name) throws IOException {
-        InputStream inputStream = this.getClass()
-                .getClassLoader()
-                .getResourceAsStream("api-option.html");
-        this.template = Utils.readFromInputStream(inputStream);
-    }
-
-    public String renderAsHtml(String version) {
-        return template.replaceAll("@version@", version);
-    }
+@FunctionalInterface
+public interface RepositoryRenderer {
+    String renderAsHtml(Repository repository);
 }

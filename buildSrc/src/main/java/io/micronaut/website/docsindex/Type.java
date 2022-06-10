@@ -13,9 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.website;
+package io.micronaut.website.docsindex;
 
-@FunctionalInterface
-public interface IndexRenderer {
-    String renderAsHtml();
+public enum Type {
+    ANALYTICS("analytics"),
+    API("api"),
+    BUILD("build"),
+    CLOUD("cloud"),
+    DATA_ACCESS("data-access"),
+    DATABASE_MIGRATION("database-migration"),
+    LANGUAGES("languages"),
+    MESSAGING("messaging"),
+    MISC("misc"),
+    REACTIVE("reactive"),
+    VIEWS("views");
+
+    private final String value;
+
+    Type(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

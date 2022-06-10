@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.website;
-
-import java.util.List;
+package io.micronaut.website.docsindex;
 
 @FunctionalInterface
-public interface VersionsFetcher {
-    List<String> versions();
+public interface ApiVersionRenderer {
+    String renderAsHtml(String version);
 }
