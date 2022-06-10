@@ -47,6 +47,7 @@ public class IndexRendererImpl implements IndexRenderer {
                 .getClassLoader()
                 .getResourceAsStream("index.html");
         this.template = Utils.readFromInputStream(inputStream);
+        inputStream.close();
         this.categoryFetcher = categoryFetcher;
         this.versionsFetcher = versionsFetcher;
         this.docVersionRenderer = docVersionRenderer;

@@ -27,6 +27,7 @@ public abstract class VersionRendererImpl {
                 .getClassLoader()
                 .getResourceAsStream("api-option.html");
         this.template = Utils.readFromInputStream(inputStream);
+        inputStream.close();
     }
 
     public String renderAsHtml(String version) {

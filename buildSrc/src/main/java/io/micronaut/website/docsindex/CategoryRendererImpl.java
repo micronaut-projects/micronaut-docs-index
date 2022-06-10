@@ -33,6 +33,7 @@ public class CategoryRendererImpl implements CategoryRenderer {
                 .getClassLoader()
                 .getResourceAsStream("category.html");
         this.template = Utils.readFromInputStream(inputStream);
+        inputStream.close();
     }
 
     @Override

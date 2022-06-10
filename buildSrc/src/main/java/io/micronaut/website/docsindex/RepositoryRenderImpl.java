@@ -29,6 +29,7 @@ public class RepositoryRenderImpl implements RepositoryRenderer {
                 .getClassLoader()
                 .getResourceAsStream("repository.html");
         this.template = Utils.readFromInputStream(inputStream);
+        inputStream.close();
     }
 
     @Override
