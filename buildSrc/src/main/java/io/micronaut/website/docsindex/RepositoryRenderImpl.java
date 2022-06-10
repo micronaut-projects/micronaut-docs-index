@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class RepositoryRenderImpl implements RepositoryRenderer {
-    private String template;
+    private final String template;
     public RepositoryRenderImpl() throws IOException {
         InputStream inputStream = this.getClass()
                 .getClassLoader()
