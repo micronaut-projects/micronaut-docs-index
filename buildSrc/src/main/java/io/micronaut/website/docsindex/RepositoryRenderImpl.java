@@ -16,7 +16,6 @@
 package io.micronaut.website.docsindex;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public class RepositoryRenderImpl implements RepositoryRenderer {
     private final String template;
@@ -28,9 +27,13 @@ public class RepositoryRenderImpl implements RepositoryRenderer {
 
     @Override
     public String renderAsHtml(Repository repository) {
+        String version = repository.isSnapshot()  ? "snapshot" : "latest";
+        if (repository.isStandardDocs()) {
+            version += "/guide";
+        }
         return template.replaceAll("@title@", repository.getTitle())
                 .replaceAll("@slug@", repository.getSlug())
                 .replaceAll("@description@", repository.getDescription())
-                .replaceAll("@version@", repository.isSnapshot()  ? "snapshot" : "latest");
+                .replaceAll("@version@", version);
     }
 }

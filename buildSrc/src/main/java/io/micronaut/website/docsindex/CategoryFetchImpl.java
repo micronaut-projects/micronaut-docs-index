@@ -73,7 +73,8 @@ public class CategoryFetchImpl implements CategoryFetcher {
                                     parseString(repositoryMap, KEY_SLUG),
                                     parseString(repositoryMap, KEY_TITLE),
                                     parseString(repositoryMap, KEY_DESCRIPTION),
-                                    parseBoolean(repositoryMap, "snapshot", false)));
+                                    parseBoolean(repositoryMap, "snapshot", false),
+                                    parseBoolean(repositoryMap, "standard-docs", true)));
                         }
                     }
                 }

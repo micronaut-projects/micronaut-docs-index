@@ -24,11 +24,15 @@ public class RepositoryImpl implements Repository {
 
     private final boolean snapshot;
 
-    public RepositoryImpl(String slug, String title, String description, boolean snapshot) {
+    private final boolean standardDocs;
+
+    public RepositoryImpl(String slug, String title, String description, boolean snapshot,
+                          boolean standardDocs) {
         this.slug = slug;
         this.title = title;
         this.description = description;
         this.snapshot = snapshot;
+        this.standardDocs = standardDocs;
     }
 
     @Override
@@ -49,5 +53,10 @@ public class RepositoryImpl implements Repository {
     @Override
     public boolean isSnapshot() {
         return snapshot;
+    }
+
+    @Override
+    public boolean isStandardDocs() {
+        return standardDocs;
     }
 }

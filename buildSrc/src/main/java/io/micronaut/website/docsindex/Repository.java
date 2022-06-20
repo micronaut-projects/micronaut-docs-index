@@ -20,4 +20,5 @@ public interface Repository {
     String getTitle();
     String getDescription();
     boolean isSnapshot();
+    boolean isStandardDocs();
 }
