@@ -163,6 +163,7 @@ categories:
     image: 'https://micronaut.io/wp-content/uploads/2020/11/Messaging.svg'
     repositories:
       jms:
+        snapshot: true      
         slug: 'micronaut-jms'
         title: 'Micronaut JMS'
         description: 'Integration between Micronaut and Java Messaging Service (JMS)'
