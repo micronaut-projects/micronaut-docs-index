@@ -64,10 +64,12 @@ categories:
         title: 'Micronaut AOT'
         description: 'Implements ahead-of-time (AOT) optimizations for Micronaut applications'
       gradle-plugin:
+        standard-docs: false
         slug: 'micronaut-gradle-plugin'
         title: 'Micronaut Gradle Plugin'
         description: 'Gradle Plugin for Micronaut that configures the Micronaut BOM and sets up annotation processing'
       maven-plugin:
+        standard-docs: false
         slug: 'micronaut-maven-plugin'
         title: 'Micronaut Maven Plugin'
         description: 'Maven plugin to execute and package Micronaut applications'
