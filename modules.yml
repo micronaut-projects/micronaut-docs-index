@@ -215,6 +215,11 @@ categories:
         slug: 'micronaut-security'
         title: 'Micronaut Security'
         description: 'Built-in security features. Authentication providers and strategies, Token Propagation...'
+      test-resources:
+        slug: 'micronaut-test-resources'
+        title: 'Micronaut Test Resources'
+        description: 'Test resources integration (like Testcontainers) for the Micronaut Framework'
+        snapshot: true
       test:
         slug: 'micronaut-test'
         title: 'Micronaut Test'
