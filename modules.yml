@@ -219,7 +219,6 @@ categories:
         slug: 'micronaut-test-resources'
         title: 'Micronaut Test Resources'
         description: 'Test resources integration (like Testcontainers) for the Micronaut Framework'
-        snapshot: true
       test:
         slug: 'micronaut-test'
         title: 'Micronaut Test'
