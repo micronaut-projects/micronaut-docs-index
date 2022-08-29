@@ -195,6 +195,11 @@ categories:
         slug: 'micronaut-cache'
         title: 'Micronaut Cache'
         description: 'Additional cache implementations (Redis, Hazelcast...).'
+      crac:
+        slug: 'micronaut-crac'
+        title: 'Micronaut Crac'
+        description: 'Adds support for CRaC (Coordinated Restore at Checkpoint) to the Micronaut Framework.'
+        snapshot: true
       email:
         slug: 'micronaut-email'
         title: 'Micronaut Email'
