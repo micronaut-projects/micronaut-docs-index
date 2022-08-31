@@ -195,6 +195,11 @@ categories:
         slug: 'micronaut-cache'
         title: 'Micronaut Cache'
         description: 'Additional cache implementations (Redis, Hazelcast...).'
+      chatbots:
+        slug: 'micronaut-chatbots'
+        title: 'Micronaut Chatbots'
+        description: 'Create Telegram, Slack, Google Chat Bots with the Micronaut Framework.'
+        snapshot: true        
       crac:
         slug: 'micronaut-crac'
         title: 'Micronaut Crac'
