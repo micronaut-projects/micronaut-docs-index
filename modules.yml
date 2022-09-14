@@ -88,7 +88,7 @@ categories:
       object-storage:
         slug: 'micronaut-object-storage'
         title: 'Micronaut Object Storage'
-        description: 'Integration to read, update and delete objects. Supports Amazon S3, Azure Blog Storage, Google Cloud Storage, Oracle Cloud Infrastructure Object Storage)'
+        description: 'Integration to read, update and delete objects. Supports Amazon S3, Azure Blog Storage, Google Cloud Storage, and Oracle Cloud Infrastructure Object Storage)'
       discovery-client:
         slug: 'micronaut-discovery-client'
         title: 'Micronaut Discovery Client'
