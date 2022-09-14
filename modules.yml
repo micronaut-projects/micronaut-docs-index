@@ -85,6 +85,10 @@ categories:
         slug: 'micronaut-azure'
         title: 'Micronaut Azure'
         description: 'Integration between Micronaut and Microsoft Azure'
+      object-storage:
+        slug: 'micronaut-object-storage'
+        title: 'Micronaut Object Storage'
+        description: 'Provides a uniform API to create, read and delete objects in the major cloud providers. Supports Amazon S3, Azure Blob Storage, Google Cloud Storage, and Oracle Cloud Infrastructure (OCI) Object Storage)'
       discovery-client:
         slug: 'micronaut-discovery-client'
         title: 'Micronaut Discovery Client'
