@@ -228,6 +228,10 @@ categories:
         slug: 'micronaut-security'
         title: 'Micronaut Security'
         description: 'Built-in security features. Authentication providers and strategies, Token Propagation...'
+      session:
+        slug: 'micronaut-session'
+        title: 'Micronaut Session'
+        description: 'Integration for HTTP sessions with the Micronaut Framework.'
       test-resources:
         slug: 'micronaut-test-resources'
         title: 'Micronaut Test Resources'
