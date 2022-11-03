@@ -63,6 +63,10 @@ categories:
         slug: 'micronaut-aot'
         title: 'Micronaut AOT'
         description: 'Implements ahead-of-time (AOT) optimizations for Micronaut applications'
+      bom:
+        slug: 'micronaut-bom'
+        title: 'Micronaut BOM'
+        description: 'Bill-of-materials (BOM) and Gradle version catalogs for Micronaut"
       gradle-plugin:
         standard-docs: false
         slug: 'micronaut-gradle-plugin'
