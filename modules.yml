@@ -63,10 +63,6 @@ categories:
         slug: 'micronaut-aot'
         title: 'Micronaut AOT'
         description: 'Implements ahead-of-time (AOT) optimizations for Micronaut applications'
-      bom:
-        slug: 'micronaut-bom'
-        title: 'Micronaut BOM'
-        description: 'Bill-of-materials (BOM) and Gradle version catalogs for Micronaut"
       gradle-plugin:
         standard-docs: false
         slug: 'micronaut-gradle-plugin'
@@ -77,6 +73,10 @@ categories:
         slug: 'micronaut-maven-plugin'
         title: 'Micronaut Maven Plugin'
         description: 'Maven plugin to execute and package Micronaut applications'
+      platform:
+        slug: 'micronaut-platform'
+        title: 'Micronaut Platform BOM'
+        description: 'Bill-of-materials (BOM) and Gradle version catalogs for Micronaut"
   cloud:
     image: 'https://micronaut.io/wp-content/uploads/2020/11/cloud.svg'
     title: 'Cloud'
