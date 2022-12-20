@@ -76,7 +76,7 @@ categories:
       platform:
         slug: 'micronaut-platform'
         title: 'Micronaut Platform BOM'
-        description: 'Bill-of-materials (BOM) and Gradle version catalogs for Micronaut"
+        description: 'Bill-of-materials (BOM) and Gradle version catalogs for Micronaut'
   cloud:
     image: 'https://micronaut.io/wp-content/uploads/2020/11/cloud.svg'
     title: 'Cloud'
