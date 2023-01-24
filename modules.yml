@@ -113,6 +113,10 @@ categories:
         slug: 'micronaut-oracle-cloud'
         title: 'Micronaut Oracle Cloud'
         description: 'Configuration to integrate Micronaut and Oracle Cloud Infrastructure'
+      pulsar:
+        slug: 'micronaut-pulsar'
+        title: 'Pulsar'
+        description: 'Integration between Apache Pulsar and Micronaut.'
       tracing:
         slug: 'micronaut-tracing'
         title: 'Tracing'
