@@ -186,6 +186,10 @@ categories:
         slug: 'micronaut-nats'
         title: 'Micronaut Nats'
         description: 'Integration between Micronaut and nats.io'
+      pulsar:
+        slug: 'micronaut-pulsar'
+        title: 'Micronaut Pulsar'
+        description: 'Integration between Micronaut and Apache Pulsar'
       rabbitmq:
         slug: 'micronaut-rabbitmq'
         title: 'Micronaut RabbitMQ'
