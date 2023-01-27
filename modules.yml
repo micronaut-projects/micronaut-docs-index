@@ -135,8 +135,8 @@ categories:
         description: 'Integration between Micronaut and Cassandra'
       coherence:
         slug: 'micronaut-coherence'
-        title: 'Micronaut for Coherence'
-        description: 'Integration between Micronaut and Oracle Coherence.'
+        title: 'Micronaut Coherence'
+        description: 'Integration with Oracle Coherence.'
       microstream:
         slug: 'micronaut-microstream'
         title: 'Micronaut Microstream'
@@ -226,7 +226,7 @@ categories:
       grpc:
         slug: 'micronaut-grpc'
         title: 'Micronaut GRPC'
-        description: 'Integration between Micronaut and GRPC.'
+        description: 'Integration with GRPC.'
       hibernate-validator:
         slug: 'micronaut-hibernate-validator'
         title: 'Micronaut Hibernate Validator'
