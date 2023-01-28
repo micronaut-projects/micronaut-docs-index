@@ -227,10 +227,6 @@ categories:
         slug: 'micronaut-hibernate-validator'
         title: 'Micronaut Hibernate Validator'
         description: 'Support for validating Micronaut beans with Hibernate Validator.'
-      ignite:
-        slug: 'micronaut-ignite'
-        title: 'Micronaut Ignite'
-        description: 'Integration with Apache Ignite.'
       picocli:
         slug: 'micronaut-picocli'
         title: 'Micronaut Picocli'
