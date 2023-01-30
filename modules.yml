@@ -251,6 +251,7 @@ categories:
         slug: 'micronaut-validation'
         title: 'Micronaut Validation'
         description: 'Validation support for Micronaut.'
+        snapshot: true
   reactive:
     title: 'Reactive'
     image: 'https://micronaut.io/wp-content/uploads/2021/05/Reactive-Programming.svg'
