@@ -223,10 +223,6 @@ categories:
         slug: 'micronaut-email'
         title: 'Micronaut Email'
         description: 'Integration with email providers such as Amazon Simple Email Service, Postmark, Mailjet or SendGrid.'
-      grpc:
-        slug: 'micronaut-grpc'
-        title: 'Micronaut GRPC'
-        description: 'Integration with GRPC.'
       hibernate-validator:
         slug: 'micronaut-hibernate-validator'
         title: 'Micronaut Hibernate Validator'
