@@ -77,6 +77,10 @@ categories:
         slug: 'micronaut-platform'
         title: 'Micronaut Platform BOM'
         description: 'Bill-of-materials (BOM) and Gradle version catalogs for Micronaut'
+      platform:
+        slug: 'micronaut-starter'
+        title: 'Micronaut Launch Documentation'
+        description: 'Generates Micronaut applications.'
   cloud:
     image: 'https://micronaut.io/wp-content/uploads/2020/11/cloud.svg'
     title: 'Cloud'
@@ -133,6 +137,10 @@ categories:
         slug: 'micronaut-cassandra'
         title: 'Micronaut for Cassandra'
         description: 'Integration between Micronaut and Cassandra'
+      coherence:
+        slug: 'micronaut-coherence'
+        title: 'Micronaut Coherence'
+        description: 'Integration with Oracle Coherence.'
       microstream:
         slug: 'micronaut-microstream'
         title: 'Micronaut Microstream'
@@ -264,10 +272,6 @@ categories:
         slug: 'micronaut-reactor'
         title: 'Micronaut Reactor'
         description: 'Project Reactor compatible HTTP Client. Converters and Instrumentation for Project Reactor types.'
-      rxjava1:
-        slug: 'micronaut-rxjava1'
-        title: 'Micronaut RxJava 1'
-        description: 'Converters and Instrumentation for RxJava 1 types'
       rxjava2:
         slug: 'micronaut-rxjava2'
         title: 'Micronaut RxJava 2'
