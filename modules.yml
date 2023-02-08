@@ -247,6 +247,7 @@ categories:
         slug: 'micronaut-session'
         title: 'Micronaut Session'
         description: 'Integration for HTTP sessions with the Micronaut Framework.'
+        snapshot: true
       test-resources:
         slug: 'micronaut-test-resources'
         title: 'Micronaut Test Resources'
