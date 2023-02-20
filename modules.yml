@@ -77,7 +77,8 @@ categories:
         slug: 'micronaut-platform'
         title: 'Micronaut Platform BOM'
         description: 'Bill-of-materials (BOM) and Gradle version catalogs for Micronaut'
-      platform:
+        snapshot: true
+      starter:
         slug: 'micronaut-starter'
         title: 'Micronaut Launch Documentation'
         description: 'Generates Micronaut applications.'
