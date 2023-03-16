@@ -266,6 +266,11 @@ categories:
         title: 'Micronaut Validation'
         description: 'Validation support for Micronaut.'
         snapshot: true
+      upgrade:
+        slug: 'micronaut-upgrade'
+        title: 'Micronaut Upgrade'
+        description: 'Instructions to upgrade your applications between Micronaut framework versions'
+        snapshot: true        
   reactive:
     title: 'Reactive'
     image: 'https://micronaut.io/wp-content/uploads/2021/05/Reactive-Programming.svg'
