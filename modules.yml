@@ -267,6 +267,7 @@ categories:
         description: 'Validation support for Micronaut.'
         snapshot: true
       upgrade:
+        standard-docs: false
         slug: 'micronaut-upgrade'
         title: 'Micronaut Upgrade'
         description: 'Instructions to upgrade your applications between Micronaut framework versions'
