@@ -63,6 +63,10 @@ categories:
         slug: 'micronaut-aot'
         title: 'Micronaut AOT'
         description: 'Implements ahead-of-time (AOT) optimizations for Micronaut applications'
+      control-panel:
+        slug: 'micronaut-control-panel'
+        title: 'Micronaut Control Panel'
+        description: 'The Micronaut Control Panel module provides a web UI that allows you to view and manage the state of your Micronaut application, typically in a development environment'
       gradle-plugin:
         standard-docs: false
         slug: 'micronaut-gradle-plugin'
