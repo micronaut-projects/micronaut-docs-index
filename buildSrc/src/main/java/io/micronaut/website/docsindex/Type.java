@@ -26,7 +26,8 @@ public enum Type {
     MESSAGING("messaging"),
     MISC("misc"),
     REACTIVE("reactive"),
-    VIEWS("views");
+    VIEWS("views"),
+    DEV_AND_TEST("dev-and-test");
 
     private final String value;
 
