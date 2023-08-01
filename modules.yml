@@ -310,7 +310,7 @@ categories:
         description: 'Configuration to integrate Micronaut and Liquibase'
   dev-and-test:
     title: 'Dev and Test'
-    image:
+    image: 'https://micronaut.io/wp-content/uploads/2021/01/MicronautTraining.svg'
     repositories:
       test-resources:
         slug: 'micronaut-test-resources'
