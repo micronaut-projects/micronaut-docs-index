@@ -63,11 +63,6 @@ categories:
         slug: 'micronaut-aot'
         title: 'Micronaut AOT'
         description: 'Implements ahead-of-time (AOT) optimizations for Micronaut applications'
-      control-panel:
-        slug: 'micronaut-control-panel'
-        title: 'Micronaut Control Panel'
-        description: 'The Micronaut Control Panel module provides a web UI that allows you to view and manage the state of your Micronaut application, typically in a development environment'
-        snapshot: true
       gradle-plugin:
         standard-docs: false
         slug: 'micronaut-gradle-plugin'
@@ -254,14 +249,6 @@ categories:
         title: 'Micronaut Session'
         description: 'Integration for HTTP sessions with the Micronaut Framework.'
         snapshot: true
-      test-resources:
-        slug: 'micronaut-test-resources'
-        title: 'Micronaut Test Resources'
-        description: 'Test resources integration (like Testcontainers) for the Micronaut Framework'
-      test:
-        slug: 'micronaut-test'
-        title: 'Micronaut Test'
-        description: 'Testing framework (Junit5/Spock) extensions for Micronaut'
       toml:
         slug: 'micronaut-toml'
         title: 'Micronaut TOML'
@@ -321,3 +308,20 @@ categories:
         slug: 'micronaut-liquibase'
         title: 'Micronaut Liquibase'
         description: 'Configuration to integrate Micronaut and Liquibase'
+  dev-and-test:
+    title: 'Dev and Test'
+    image:
+    repositories:
+      test-resources:
+        slug: 'micronaut-test-resources'
+        title: 'Micronaut Test Resources'
+        description: 'Test resources integration (like Testcontainers) for the Micronaut Framework'
+      test:
+        slug: 'micronaut-test'
+        title: 'Micronaut Test'
+        description: 'Testing framework (Junit5/Spock) extensions for Micronaut'
+      control-panel:
+        slug: 'micronaut-control-panel'
+        title: 'Micronaut Control Panel'
+        description: 'The Micronaut Control Panel module provides a web UI that allows you to view and manage the state of your Micronaut application, typically in a development environment'
+        snapshot: true
