@@ -46,10 +46,8 @@ public class IndexRendererImpl implements IndexRenderer {
     @Override
     public String renderAsHtml() {
         List<String> versions = versionsFetcher.versions();
-        String latestVersion = versions.get(0);
         List<String> oldVersions = versions.subList(1, versions.size());
-        return template.replaceAll("@version@", versions.get(0))
-                .replaceAll("@doc-options@", oldVersions.stream()
+        return template.replaceAll("@doc-options@", oldVersions.stream()
                         .map(version -> docVersionRenderer.renderAsHtml(version)).collect(Collectors.joining("\n")))
                 .replaceAll("@api-options@", oldVersions.stream()
                         .map(version -> apiVersionRenderer.renderAsHtml(version)).collect(Collectors.joining("\n")))
