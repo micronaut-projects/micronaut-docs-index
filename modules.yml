@@ -312,14 +312,14 @@ categories:
     title: 'Dev & Test'
     image: 'https://micronaut.io/wp-content/uploads/2021/01/MicronautTraining.svg'
     repositories:
-      test-resources:
-        slug: 'micronaut-test-resources'
-        title: 'Micronaut Test Resources'
-        description: 'Test resources integration (like Testcontainers) for the Micronaut Framework'
       test:
         slug: 'micronaut-test'
         title: 'Micronaut Test'
         description: 'Testing framework (Junit5/Spock) extensions for Micronaut'
+      test-resources:
+        slug: 'micronaut-test-resources'
+        title: 'Micronaut Test Resources'
+        description: 'Test resources integration (like Testcontainers) for the Micronaut Framework'
       control-panel:
         slug: 'micronaut-control-panel'
         title: 'Micronaut Control Panel'
