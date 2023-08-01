@@ -27,7 +27,8 @@ public enum Type {
     MISC("misc"),
     REACTIVE("reactive"),
     VIEWS("views"),
-    DEV_AND_TEST("dev-and-test");
+    DEV_AND_TEST("dev-and-test"),
+    MOST_POPULAR("most-popular");
 
     private final String value;
 
