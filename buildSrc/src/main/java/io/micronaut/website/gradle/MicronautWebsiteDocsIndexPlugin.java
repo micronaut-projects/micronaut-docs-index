@@ -32,7 +32,6 @@ public abstract class MicronautWebsiteDocsIndexPlugin implements Plugin<Project>
         Directory projectDirectory = project.getLayout().getProjectDirectory();
         TaskProvider<RenderMicronautWebsiteDocsIndexTask> renderDocsIndex = tasks.register("renderDocsIndex", RenderMicronautWebsiteDocsIndexTask.class, task -> {
             task.getModules().convention(projectDirectory.file("modules.yml"));
-            task.getReleases().convention(projectDirectory.file("releases.yml"));
             task.getDestinationFile().convention(buildDirectory.map(dir -> dir.file("index.html")));
         });
         tasks.findByName("build").dependsOn(renderDocsIndex);
