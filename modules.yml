@@ -325,3 +325,32 @@ categories:
         title: 'Micronaut Control Panel'
         description: 'The Micronaut Control Panel module provides a web UI that allows you to view and manage the state of your Micronaut application, typically in a development environment'
         snapshot: true
+  most-popular:
+    title: 'Most Popular'
+    image: ''
+    repositories:
+      data:
+        slug: 'micronaut-data'
+        title: 'Micronaut Data'
+        description: 'Data Repository Support for Micronaut'
+      security:
+        slug: 'micronaut-security'
+        title: 'Micronaut Security'
+        description: 'Built-in security features. Authentication providers and strategies, Token Propagation...'
+      graphql:
+        slug: 'micronaut-graphql'
+        title: 'Micronaut GraphQL'
+        description: 'Extensions to integrate Micronaut and GraphQL'
+      spring:
+        slug: 'micronaut-spring'
+        title: 'Micronaut Spring'
+        description: 'Extensions to integrate Micronaut and Spring'
+      kafka:
+        slug: 'micronaut-kafka'
+        title: 'Micronaut Kafka'
+        description: 'Integration between Micronaut and Kafka Messaging'
+      openapi:
+        slug: 'micronaut-openapi'
+        title: 'Micronaut Open API'
+        description: 'Configuration to integrate Micronaut and OpenAPI/Swagger'
+
