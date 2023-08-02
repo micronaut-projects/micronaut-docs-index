@@ -24,33 +24,18 @@ public class IndexRendererImpl implements IndexRenderer {
     private final String template;
     private final CategoryRenderer categoryRenderer;
     private final CategoryFetcher categoryFetcher;
-    private final VersionsFetcher versionsFetcher;
-    private final DocVersionRenderer docVersionRenderer;
-    private final ApiVersionRenderer apiVersionRenderer;
-
     public IndexRendererImpl(CategoryRenderer categoryRenderer,
-                             CategoryFetcher categoryFetcher,
-                             VersionsFetcher versionsFetcher,
-                             DocVersionRenderer docVersionRenderer,
-    ApiVersionRenderer apiVersionRenderer) throws IOException {
+                             CategoryFetcher categoryFetcher) throws IOException {
         this.categoryRenderer = categoryRenderer;
         this.template = Utils.readFromURL(this.getClass()
                 .getClassLoader()
                 .getResource("index.html"));
         this.categoryFetcher = categoryFetcher;
-        this.versionsFetcher = versionsFetcher;
-        this.docVersionRenderer = docVersionRenderer;
-        this.apiVersionRenderer = apiVersionRenderer;
     }
 
     @Override
     public String renderAsHtml() {
-        List<String> versions = versionsFetcher.versions();
-        List<String> oldVersions = versions.subList(1, versions.size());
-        return template.replaceAll("@doc-options@", oldVersions.stream()
-                        .map(version -> docVersionRenderer.renderAsHtml(version)).collect(Collectors.joining("\n")))
-                .replaceAll("@api-options@", oldVersions.stream()
-                        .map(version -> apiVersionRenderer.renderAsHtml(version)).collect(Collectors.joining("\n")))
+        return template
                 .replaceAll("@analytics@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.ANALYTICS).orElseThrow()))
                 .replaceAll("@api@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.API).orElseThrow()))
                 .replaceAll("@build@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.BUILD).orElseThrow()))
