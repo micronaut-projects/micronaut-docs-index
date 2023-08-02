@@ -15,14 +15,11 @@
  */
 package io.micronaut.website.gradle;
 
-import io.micronaut.website.docsindex.ApiVersionRendererImpl;
 import io.micronaut.website.docsindex.CategoryFetchImpl;
 import io.micronaut.website.docsindex.CategoryRendererImpl;
-import io.micronaut.website.docsindex.DocVersionRendererImpl;
 import io.micronaut.website.docsindex.IndexRenderer;
 import io.micronaut.website.docsindex.IndexRendererImpl;
 import io.micronaut.website.docsindex.RepositoryRenderImpl;
-import io.micronaut.website.docsindex.VersionsFetcherImpl;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;
@@ -45,10 +42,6 @@ public abstract class RenderMicronautWebsiteDocsIndexTask extends DefaultTask {
     @PathSensitive(PathSensitivity.NONE)
     public abstract RegularFileProperty getModules();
 
-    @InputFile
-    @PathSensitive(PathSensitivity.NONE)
-    public abstract RegularFileProperty getReleases();
-
     @OutputFile
     public abstract RegularFileProperty getDestinationFile();
 
@@ -56,12 +49,8 @@ public abstract class RenderMicronautWebsiteDocsIndexTask extends DefaultTask {
     void render() {
         try {
             File modulesFile = getModules().getAsFile().get();
-            File releasesFile = getReleases().getAsFile().get();
             IndexRenderer indexRenderer = new IndexRendererImpl(new CategoryRendererImpl(new RepositoryRenderImpl()),
-                    new CategoryFetchImpl(modulesFile),
-                    new VersionsFetcherImpl(releasesFile),
-                    new DocVersionRendererImpl(),
-                    new ApiVersionRendererImpl());
+                    new CategoryFetchImpl(modulesFile));
             String html = indexRenderer.renderAsHtml();
             try (FileOutputStream fos = new FileOutputStream(getDestinationFile().getAsFile().get())) {
                 fos.write(html.getBytes(StandardCharsets.UTF_8.name()));
