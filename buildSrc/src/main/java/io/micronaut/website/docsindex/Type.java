@@ -28,7 +28,8 @@ public enum Type {
     REACTIVE("reactive"),
     VIEWS("views"),
     DEV_AND_TEST("dev-and-test"),
-    MOST_POPULAR("most-popular");
+    MOST_POPULAR("most-popular"),
+    VALIDATION("validation");
 
     private final String value;
 
