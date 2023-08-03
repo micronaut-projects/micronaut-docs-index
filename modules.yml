@@ -346,7 +346,7 @@ categories:
         description: 'Configuration to integrate Micronaut and OpenAPI/Swagger'
   validation:
     title: 'Validation'
-    image: ''
+    image: 'https://micronaut.io/wp-content/uploads/2023/08/validation.svg'
     repositories:
       validation:
         slug: 'micronaut-validation'
