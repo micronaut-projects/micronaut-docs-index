@@ -327,7 +327,7 @@ categories:
         snapshot: true
   most-popular:
     title: 'Most Popular'
-    image: ''
+    image: 'https://micronaut.io/wp-content/uploads/2023/08/mostpopular.svg'
     repositories:
       data:
         slug: 'micronaut-data'
