@@ -126,6 +126,14 @@ categories:
         slug: 'micronaut-tracing'
         title: 'Tracing'
         description: 'Integration with both Zipkin and Jaeger (via the Open Tracing API).'
+  configuration:
+    title: 'Configuration'
+    image: 'https://micronaut.io/wp-content/uploads/2023/08/configuration.svg'
+    repositories:
+      toml:
+        slug: 'micronaut-toml'
+        title: 'Micronaut TOML'
+        description: 'Micronaut TOML is the TOML configuration adapter for the Micronaut Framework.'
   data-access:
     title: 'Data Access'
     image: 'https://micronaut.io/wp-content/uploads/2020/11/dataaccess.svg'
@@ -245,10 +253,6 @@ categories:
         title: 'Micronaut Session'
         description: 'Integration for HTTP sessions with the Micronaut Framework.'
         snapshot: true
-      toml:
-        slug: 'micronaut-toml'
-        title: 'Micronaut TOML'
-        description: 'Micronaut TOML is the TOML configuration adapter for the Micronaut Framework.'
       upgrade:
         standard-docs: false
         slug: 'micronaut-upgrade'
