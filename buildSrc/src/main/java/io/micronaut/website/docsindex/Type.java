@@ -22,6 +22,7 @@ public enum Type {
     CLOUD("cloud"),
     DATA_ACCESS("data-access"),
     DATABASE_MIGRATION("database-migration"),
+    ERRORS("errors"),
     LANGUAGES("languages"),
     MESSAGING("messaging"),
     MISC("misc"),
