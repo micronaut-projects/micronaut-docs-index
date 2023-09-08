@@ -20,6 +20,7 @@ public enum Type {
     API("api"),
     BUILD("build"),
     CLOUD("cloud"),
+    CONFIGURATION("configuration"),
     DATA_ACCESS("data-access"),
     DATABASE_MIGRATION("database-migration"),
     ERRORS("errors"),

@@ -40,6 +40,7 @@ public class IndexRendererImpl implements IndexRenderer {
                 .replaceAll("@api@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.API).orElseThrow()))
                 .replaceAll("@build@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.BUILD).orElseThrow()))
                 .replaceAll("@cloud@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.CLOUD).orElseThrow()))
+                .replaceAll("@configuration@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.CONFIGURATION).orElseThrow()))
                 .replaceAll("@data-access@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.DATA_ACCESS).orElseThrow()))
                 .replaceAll("@database-migration@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.DATABASE_MIGRATION).orElseThrow()))
                 .replaceAll("@errors@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.ERRORS).orElseThrow()))
