@@ -39,10 +39,6 @@ categories:
         slug: 'micronaut-openapi'
         title: 'Micronaut Open API'
         description: 'Configuration to integrate Micronaut and OpenAPI/Swagger'
-      problem-json:
-        slug: 'micronaut-problem-json'
-        title: 'Micronaut Problem+JSON'
-        description: 'Produce application/problem+json responses from a Micronaut application.'
       serialization:
         slug: 'micronaut-serialization'
         title: 'Micronaut Serialization'
@@ -167,6 +163,14 @@ categories:
         slug: 'micronaut-sql'
         title: 'Micronaut SQL / JDBC'
         description: 'Projects (JDBC Hibernate Reactive Postgres ...) to support SQL Database access in Micronaut'
+  errors:
+    title: 'Errors'
+    image: 'https://micronaut.io/wp-content/uploads/2023/08/error.svg'
+    repositories:
+      problem-json:
+        slug: 'micronaut-problem-json'
+        title: 'Micronaut Problem+JSON'
+        description: 'Produce application/problem+json responses from a Micronaut application.'
   languages:
     title: 'Languages'
     image: 'https://micronaut.io/wp-content/uploads/2020/11/Languages.svg'
