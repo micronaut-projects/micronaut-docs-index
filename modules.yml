@@ -151,6 +151,11 @@ categories:
         title: 'Micronaut Microstream'
         description: 'Native Java object graph storage engine.'
         snapshot: true
+      eclipsestore:
+        slug: 'micronaut-eclipsestore'
+        title: 'Micronaut EclipseStore'
+        description: 'Native Java object graph storage engine.'
+        snapshot: true
       mongodb:
         slug: 'micronaut-mongodb'
         title: 'Micronaut MongoDB'
