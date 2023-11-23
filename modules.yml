@@ -146,6 +146,11 @@ categories:
         slug: 'micronaut-coherence'
         title: 'Micronaut Coherence'
         description: 'Integration with Oracle Coherence.'
+      eclipsestore:
+        slug: 'micronaut-eclipsestore'
+        title: 'Micronaut EclipseStore'
+        description: 'Native Java object graph storage engine.'
+        snapshot: true            
       microstream:
         slug: 'micronaut-microstream'
         title: 'Micronaut Microstream'
