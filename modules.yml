@@ -6,7 +6,7 @@ categories:
       elastic-search:
         slug: 'micronaut-elasticsearch'
         title: 'Micronaut Elasticsearch'
-        description: 'Configuration to integrate Micronaut and Elasticsearch'
+        description: 'Configuration to integrate Micronaut framework and Elasticsearch'
       jmx:
         slug: 'micronaut-jmx'
         title: 'Micronaut JMX'
@@ -14,7 +14,12 @@ categories:
       micrometer:
         slug: 'micronaut-micrometer'
         title: 'Micronaut Micrometer'
-        description: 'Provides integration between Micronaut and Micrometer'
+        description: 'Provides integration between Micronaut framework and Micrometer'
+      opensearch:
+        slug: 'micronaut-opensearch'
+        title: 'Micronaut OpenSearch'
+        snapshot: true        
+        description: 'Configuration to integrate Micronaut framework and OpenSearch'        
   api:
     title: 'API'
     image: 'https://micronaut.io/wp-content/uploads/2020/11/API.svg'
@@ -73,7 +78,6 @@ categories:
         slug: 'micronaut-platform'
         title: 'Micronaut Platform BOM'
         description: 'Bill-of-materials (BOM) and Gradle version catalogs for Micronaut'
-        snapshot: true
       starter:
         slug: 'micronaut-starter'
         title: 'Micronaut Launch Documentation'
