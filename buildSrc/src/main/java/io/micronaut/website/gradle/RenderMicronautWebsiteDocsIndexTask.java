@@ -20,11 +20,16 @@ import io.micronaut.website.docsindex.CategoryRendererImpl;
 import io.micronaut.website.docsindex.IndexRenderer;
 import io.micronaut.website.docsindex.IndexRendererImpl;
 import io.micronaut.website.docsindex.RepositoryRenderImpl;
+import io.micronaut.website.docsindex.VersionService;
+import io.micronaut.website.docsindex.VersionServiceImpl;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.CacheableTask;
+import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
@@ -33,10 +38,15 @@ import org.gradle.api.tasks.TaskAction;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 
 @CacheableTask
 public abstract class RenderMicronautWebsiteDocsIndexTask extends DefaultTask {
+
+    @Input
+    @Optional
+    public abstract Property<String> getReleaseVersion();
 
     @InputFile
     @PathSensitive(PathSensitivity.NONE)
@@ -49,11 +59,18 @@ public abstract class RenderMicronautWebsiteDocsIndexTask extends DefaultTask {
     void render() {
         try {
             File modulesFile = getModules().getAsFile().get();
-            IndexRenderer indexRenderer = new IndexRendererImpl(new CategoryRendererImpl(new RepositoryRenderImpl()),
-                    new CategoryFetchImpl(modulesFile));
+
+            VersionService versionService = getReleaseVersion()
+                    .map(v -> (VersionService) new VersionServiceImpl(v))
+                    .getOrElse(VersionService.LATEST_VERSION_SERVICE);
+
+            IndexRenderer indexRenderer = new IndexRendererImpl(
+                    new CategoryRendererImpl(new RepositoryRenderImpl(versionService)),
+                    new CategoryFetchImpl(modulesFile)
+            );
             String html = indexRenderer.renderAsHtml();
             try (FileOutputStream fos = new FileOutputStream(getDestinationFile().getAsFile().get())) {
-                fos.write(html.getBytes(StandardCharsets.UTF_8.name()));
+                fos.write(html.getBytes(StandardCharsets.UTF_8));
             }
         } catch (IOException e) {
             throw new GradleException("IO Exception rendering index");

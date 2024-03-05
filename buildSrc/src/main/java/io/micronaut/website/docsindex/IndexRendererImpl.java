@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2022 original authors
+ * Copyright 2017-2024 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,20 @@
 package io.micronaut.website.docsindex;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class IndexRendererImpl implements IndexRenderer {
+
     private final String template;
     private final CategoryRenderer categoryRenderer;
     private final CategoryFetcher categoryFetcher;
+
     public IndexRendererImpl(CategoryRenderer categoryRenderer,
                              CategoryFetcher categoryFetcher) throws IOException {
         this.categoryRenderer = categoryRenderer;
-        this.template = Utils.readFromURL(this.getClass()
-                .getClassLoader()
-                .getResource("index.html"));
         this.categoryFetcher = categoryFetcher;
+        try (var stream = this.getClass().getClassLoader().getResourceAsStream("index.html")) {
+            this.template = new String(stream.readAllBytes());
+        }
     }
 
     @Override

@@ -15,5 +15,10 @@
  */
 package io.micronaut.website.docsindex;
 
-public record Repository(String slug, String title, String description, boolean snapshot, boolean standardDocs) {
+@FunctionalInterface
+public interface VersionService {
+
+    VersionService LATEST_VERSION_SERVICE = module -> "latest";
+
+    String getReleaseVersion(Repository module);
 }
