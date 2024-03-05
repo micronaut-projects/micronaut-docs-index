@@ -52,6 +52,11 @@ public abstract class MicronautWebsiteDocsIndexPlugin implements Plugin<Project>
                     )
             );
         });
+        tasks.register("renderReleasesDocsIndex", RenderMicronautWebsiteReleasesDocsIndexTask.class, task -> {
+            task.getModules().convention(projectDirectory.file("modules.yml"));
+            task.getReleases().convention(projectDirectory.file("releases.yml"));
+            task.getDestinationDirectory().convention(buildDirectory.dir("releases"));
+        });
         tasks.findByName("build").dependsOn(renderDocsIndex);
     }
 

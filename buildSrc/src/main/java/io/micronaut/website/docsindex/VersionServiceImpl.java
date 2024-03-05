@@ -15,31 +15,80 @@
  */
 package io.micronaut.website.docsindex;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class VersionServiceImpl implements VersionService {
 
     private final String releaseVersion;
-    private final boolean prePlatform;
+    private final VersionType versionType;
     private final Map<String, String> versions = new HashMap<>();
 
     public VersionServiceImpl(String version) {
+        System.out.println("Version is " + version);
         this.releaseVersion = version;
-        prePlatform = isPrePlatform(releaseVersion);
-        String toml = prePlatform
-                ? "https://repo1.maven.org/maven2/io/micronaut/micronaut-bom/%s/micronaut-bom-%s.toml".formatted(releaseVersion, releaseVersion)
-                : "https://repo1.maven.org/maven2/io/micronaut/platform/micronaut-platform/%s/micronaut-platform-%s.toml".formatted(releaseVersion, releaseVersion);
-        readToml(toml);
+        versionType = versionType(releaseVersion);
+        String url = switch (versionType) {
+            case PLATFORM ->
+                    "https://repo1.maven.org/maven2/io/micronaut/platform/micronaut-platform/%s/micronaut-platform-%s.toml".formatted(releaseVersion, releaseVersion);
+            case CATALOG ->
+                    "https://repo1.maven.org/maven2/io/micronaut/micronaut-bom/%s/micronaut-bom-%s.toml".formatted(releaseVersion, releaseVersion);
+            case POM ->
+                    "https://repo1.maven.org/maven2/io/micronaut/micronaut-bom/%s/micronaut-bom-%s.pom".formatted(releaseVersion, releaseVersion);
+        };
+        if (versionType == VersionType.POM) {
+            readPom(url);
+        } else {
+            readToml(url);
+        }
+        // Patch for badly named things in 3.x
+        patchVersions(Map.of(
+                "micronaut-xml", "micronaut-jackson-xml",
+                "micronaut-discovery", "micronaut-discovery-client",
+                "micronaut-oraclecloud", "micronaut-oracle-cloud",
+                "micronaut-mongo", "micronaut-mongodb",
+                "micronaut-problem", "micronaut-problem-json"
+        ));
     }
 
-    private boolean isPrePlatform(String releaseVersion) {
-        return Integer.parseInt(releaseVersion.split("\\.")[0]) < 4;
+    private VersionType versionType(String releaseVersion) {
+        int major = Integer.parseInt(releaseVersion.split("\\.")[0]);
+        if (major < 2) {
+            return VersionType.POM;
+        } else if (major < 4) {
+            return VersionType.CATALOG;
+        }
+        return VersionType.PLATFORM;
+    }
+
+    private void readPom(String pom) {
+        XmlMapper mapper = new XmlMapper();
+        try (InputStream s = new URL(pom).openStream()) {
+            var properties = (Map<String, String>) mapper.readValue(s, Map.class).get("properties");
+            properties.entrySet()
+                    .stream()
+                    .map(e -> transform(e.getKey(), e.getValue()))
+                    .filter(Objects::nonNull)
+                    .forEach(e -> versions.put(e.getKey(), e.getValue()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Map.Entry<String, String> transform(String key, String value) {
+        Matcher matcher = Pattern.compile("micronaut\\.(\\S+?)\\.version").matcher(key);
+        if (matcher.find()) {
+            return Map.entry("micronaut-" + matcher.group(1).replaceAll("\\.", "-"), value);
+        }
+        return null;
     }
 
     private void readToml(String toml) {
@@ -49,15 +98,6 @@ public class VersionServiceImpl implements VersionService {
             while (matcher.find()) {
                 versions.put(matcher.group(1), matcher.group(2));
             }
-
-            // Patch for badly named things in 3.x
-            patchVersions(Map.of(
-                    "micronaut-xml", "micronaut-jackson-xml",
-                    "micronaut-discovery", "micronaut-discovery-client",
-                    "micronaut-oraclecloud", "micronaut-oracle-cloud",
-                    "micronaut-mongo", "micronaut-mongodb",
-                    "micronaut-problem", "micronaut-problem-json"
-            ));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -78,7 +118,7 @@ public class VersionServiceImpl implements VersionService {
             return releaseVersion;
         }
         // Pre platform versions are all the same
-        if ("micronaut-core".equals(module.slug()) && prePlatform) {
+        if ("micronaut-core".equals(module.slug()) && versionType != VersionType.PLATFORM) {
             return releaseVersion;
         }
         String version = versions.get(module.slug());
@@ -88,5 +128,9 @@ public class VersionServiceImpl implements VersionService {
             return "latest";
         }
         return version;
+    }
+
+    private enum VersionType {
+        PLATFORM, CATALOG, POM
     }
 }

@@ -32,12 +32,16 @@ public class CategoryRendererImpl implements CategoryRenderer {
 
     @Override
     public String renderAsHtml(Category category) {
+        String repositoryHtml = category.repositories()
+                .stream()
+                .map(repositoryRenderer::renderAsHtml)
+                .collect(Collectors.joining("\n"));
+        if (repositoryHtml.isBlank()) {
+            return "";
+        }
         return template
                 .replaceAll("@title@", category.title())
                 .replaceAll("@image@", category.image())
-                .replaceAll("@repositories@", category.repositories()
-                        .stream()
-                        .map(repositoryRenderer::renderAsHtml)
-                        .collect(Collectors.joining("\n")));
+                .replaceAll("@repositories@", repositoryHtml);
     }
 }
