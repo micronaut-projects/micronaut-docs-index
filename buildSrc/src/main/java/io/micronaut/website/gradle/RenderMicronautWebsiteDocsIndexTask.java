@@ -38,7 +38,6 @@ import org.gradle.api.tasks.TaskAction;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 
 @CacheableTask
@@ -61,11 +60,14 @@ public abstract class RenderMicronautWebsiteDocsIndexTask extends DefaultTask {
             File modulesFile = getModules().getAsFile().get();
 
             VersionService versionService = getReleaseVersion()
-                    .map(v -> (VersionService) new VersionServiceImpl(v))
+                    .map(v -> {
+                        getLogger().lifecycle("Rendering release {}.html to {}", v, getDestinationFile().get().getAsFile());
+                        return (VersionService) new VersionServiceImpl(v);
+                    })
                     .getOrElse(VersionService.LATEST_VERSION_SERVICE);
 
             IndexRenderer indexRenderer = new IndexRendererImpl(
-                    new CategoryRendererImpl(new RepositoryRenderImpl(versionService)),
+                    new CategoryRendererImpl(new RepositoryRenderImpl(getLogger(), versionService)),
                     new CategoryFetchImpl(modulesFile),
                     versionService
             );

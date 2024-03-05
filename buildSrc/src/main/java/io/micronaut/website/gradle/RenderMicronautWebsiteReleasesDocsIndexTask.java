@@ -70,9 +70,10 @@ public abstract class RenderMicronautWebsiteReleasesDocsIndexTask extends Defaul
                 var obj = yaml.loadAs(fis, Map.class);
                 List<String> releases = (List<String>) obj.get("releases");
                 for (String release : releases) {
+                    getLogger().lifecycle("Rendering release {}.html to {}", release, getDestinationDirectory().get().getAsFile());
                     VersionService versionService = new VersionServiceImpl(release);
                     IndexRenderer indexRenderer = new IndexRendererImpl(
-                            new CategoryRendererImpl(new RepositoryRenderImpl(versionService)),
+                            new CategoryRendererImpl(new RepositoryRenderImpl(getLogger(), versionService)),
                             new CategoryFetchImpl(modulesFile),
                             versionService
                     );

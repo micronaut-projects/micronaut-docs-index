@@ -6,34 +6,37 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      JDK_VERSION:  '11'
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: "📥 Checkout repository"
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 11
+          java-version: 17
           distribution: 'temurin'
+
       - name: Build with Gradle
         run: ./gradlew build
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
           GRADLE_ENTERPRISE_CACHE_USERNAME: ${{ secrets.GRADLE_ENTERPRISE_CACHE_USERNAME }}
           GRADLE_ENTERPRISE_CACHE_PASSWORD: ${{ secrets.GRADLE_ENTERPRISE_CACHE_PASSWORD }}
+
       - name: Publish to Github Pages
         uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
           branch: gh-pages
-          folder: build
+          folder: build/dist
           repository-name: "micronaut-projects/micronaut-docs"
           clean: false
           token: ${{ secrets.GH_TOKEN }}

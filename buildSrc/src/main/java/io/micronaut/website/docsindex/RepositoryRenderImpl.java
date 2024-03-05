@@ -15,14 +15,18 @@
  */
 package io.micronaut.website.docsindex;
 
+import org.gradle.api.logging.Logger;
+
 import java.io.IOException;
 
 public class RepositoryRenderImpl implements RepositoryRenderer {
 
     private final String template;
+    private final Logger logger;
     private final VersionService versionService;
 
-    public RepositoryRenderImpl(VersionService versionService) throws IOException {
+    public RepositoryRenderImpl(Logger logger, VersionService versionService) throws IOException {
+        this.logger = logger;
         this.versionService = versionService;
         try(var stream = this.getClass().getClassLoader().getResourceAsStream("repository.html")) {
             this.template = new String(stream.readAllBytes());
@@ -33,7 +37,7 @@ public class RepositoryRenderImpl implements RepositoryRenderer {
     public String renderAsHtml(Repository repository) {
         String version = repository.snapshot() ? "snapshot" : versionService.getReleaseVersion(repository);
         if (version == null) {
-            System.out.printf("Skipping %s as no version found%n", repository.slug());
+            logger.info("Skipping {} as no version found", repository.slug());
             return "";
         }
         if (repository.standardDocs()) {

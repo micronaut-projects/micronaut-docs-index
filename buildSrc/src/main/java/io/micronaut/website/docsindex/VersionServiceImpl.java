@@ -16,6 +16,7 @@
 package io.micronaut.website.docsindex;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.gradle.api.GradleException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +34,6 @@ public class VersionServiceImpl implements VersionService {
     private final Map<String, String> versions = new HashMap<>();
 
     public VersionServiceImpl(String version) {
-        System.out.println("Version is " + version);
         this.releaseVersion = version;
         versionType = versionType(releaseVersion);
         String url = switch (versionType) {
@@ -79,7 +79,7 @@ public class VersionServiceImpl implements VersionService {
                     .filter(Objects::nonNull)
                     .forEach(e -> versions.put(e.getKey(), e.getValue()));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new GradleException("Error parsing POM", e);
         }
     }
 
@@ -99,7 +99,7 @@ public class VersionServiceImpl implements VersionService {
                 versions.put(matcher.group(1), matcher.group(2));
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new GradleException("Error parsing TOML", e);
         }
     }
 
