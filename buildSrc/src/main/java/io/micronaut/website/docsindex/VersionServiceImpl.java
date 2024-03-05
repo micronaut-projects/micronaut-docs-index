@@ -26,14 +26,20 @@ import java.util.regex.Pattern;
 public class VersionServiceImpl implements VersionService {
 
     private final String releaseVersion;
+    private final boolean prePlatform;
     private final Map<String, String> versions = new HashMap<>();
 
     public VersionServiceImpl(String version) {
         this.releaseVersion = version;
-        String toml = releaseVersion.split("\\.")[0].equals("3")
+        prePlatform = isPrePlatform(releaseVersion);
+        String toml = prePlatform
                 ? "https://repo1.maven.org/maven2/io/micronaut/micronaut-bom/%s/micronaut-bom-%s.toml".formatted(releaseVersion, releaseVersion)
                 : "https://repo1.maven.org/maven2/io/micronaut/platform/micronaut-platform/%s/micronaut-platform-%s.toml".formatted(releaseVersion, releaseVersion);
         readToml(toml);
+    }
+
+    private boolean isPrePlatform(String releaseVersion) {
+        return Integer.parseInt(releaseVersion.split("\\.")[0]) < 4;
     }
 
     private void readToml(String toml) {
@@ -69,6 +75,10 @@ public class VersionServiceImpl implements VersionService {
     public String getReleaseVersion(Repository module) {
         // micronaut starter isn't in the platform, and has the same version as the release
         if ("micronaut-starter".equals(module.slug())) {
+            return releaseVersion;
+        }
+        // Pre platform versions are all the same
+        if ("micronaut-core".equals(module.slug()) && prePlatform) {
             return releaseVersion;
         }
         String version = versions.get(module.slug());

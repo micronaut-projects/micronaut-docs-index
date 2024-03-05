@@ -66,7 +66,8 @@ public abstract class RenderMicronautWebsiteDocsIndexTask extends DefaultTask {
 
             IndexRenderer indexRenderer = new IndexRendererImpl(
                     new CategoryRendererImpl(new RepositoryRenderImpl(versionService)),
-                    new CategoryFetchImpl(modulesFile)
+                    new CategoryFetchImpl(modulesFile),
+                    versionService
             );
             String html = indexRenderer.renderAsHtml();
             try (FileOutputStream fos = new FileOutputStream(getDestinationFile().getAsFile().get())) {
