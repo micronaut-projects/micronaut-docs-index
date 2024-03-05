@@ -23,15 +23,18 @@ public class IndexRendererImpl implements IndexRenderer {
     private final CategoryRenderer categoryRenderer;
     private final CategoryFetcher categoryFetcher;
     private final VersionService versionService;
+    private final String platformVersion;
 
     public IndexRendererImpl(
             CategoryRenderer categoryRenderer,
             CategoryFetcher categoryFetcher,
-            VersionService versionService
+            VersionService versionService,
+            String platformVersion
     ) throws IOException {
         this.categoryRenderer = categoryRenderer;
         this.categoryFetcher = categoryFetcher;
         this.versionService = versionService;
+        this.platformVersion = platformVersion;
         try (var stream = this.getClass().getClassLoader().getResourceAsStream("index.html")) {
             this.template = new String(stream.readAllBytes());
         }
@@ -41,6 +44,7 @@ public class IndexRendererImpl implements IndexRenderer {
     public String renderAsHtml() {
         return template
                 .replaceAll("@version@", versionService.getReleaseVersion(new Repository("micronaut-core", null, null, false, true)))
+                .replaceAll("@platformVersion@", platformVersion == null ? "" : "v" + platformVersion)
                 .replaceAll("@analytics@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.ANALYTICS).orElseThrow()))
                 .replaceAll("@api@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.API).orElseThrow()))
                 .replaceAll("@build@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.BUILD).orElseThrow()))
