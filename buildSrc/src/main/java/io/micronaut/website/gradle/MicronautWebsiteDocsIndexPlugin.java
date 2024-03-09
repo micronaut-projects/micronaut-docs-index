@@ -31,8 +31,9 @@ import java.util.regex.Pattern;
 public abstract class MicronautWebsiteDocsIndexPlugin implements Plugin<Project> {
 
     private static final Pattern VERSION_PATTERN_CLEAN = Pattern.compile("^(?:v?)(\\d+\\.\\d+\\.\\d+)$");
-    private static final String MICRONAUT_RELEASE_VERSION = "MICRONAUT_RELEASE_VERSION";
     private static final String DOCUMENTATION_INDEX = "Documentation Index";
+    public static final String LATEST_STABLE_RELEASE = "latestStableRelease";
+    public static final String TASK_BUILD = "build";
 
     @Override
     public void apply(Project project) {
@@ -45,20 +46,15 @@ public abstract class MicronautWebsiteDocsIndexPlugin implements Plugin<Project>
 
         Provider<String> micronautReleaseVersion = project
                 .getProviders()
-                .environmentVariable(MICRONAUT_RELEASE_VERSION)
+                .gradleProperty(LATEST_STABLE_RELEASE)
                 .map(this::cleanupVersion);
 
         TaskProvider<RenderMicronautWebsiteDocsIndexTask> renderDocsIndex = tasks.register("renderDocsIndex", RenderMicronautWebsiteDocsIndexTask.class, task -> {
             task.setGroup(DOCUMENTATION_INDEX);
-            task.setDescription("Render the index.html, or a specific version if " + MICRONAUT_RELEASE_VERSION + " env var is set");
+            task.setDescription("Render the index.html, or a specific version if property  " + LATEST_STABLE_RELEASE + " is set");
             task.getModules().convention(projectDirectory.file("modules.yml"));
             task.getReleaseVersion().set(micronautReleaseVersion);
-            task.getDestinationFile().convention(
-                    buildDirectory.dir("generated").flatMap(dir -> micronautReleaseVersion
-                            .map(v -> dir.file(v + ".html"))
-                            .orElse(dir.file("index.html"))
-                    )
-            );
+            task.getDestinationFile().convention(buildDirectory.map(dir -> dir.file("index.html")));
         });
         var copyAssets = tasks.register("copyAssets", Copy.class, task -> {
             task.setGroup(DOCUMENTATION_INDEX);
@@ -68,7 +64,7 @@ public abstract class MicronautWebsiteDocsIndexPlugin implements Plugin<Project>
             task.into(layout.getBuildDirectory().dir("dist"));
             task.mustRunAfter(renderDocsIndex);
         });
-        tasks.register("renderReleasesDocsIndex", RenderMicronautWebsiteReleasesDocsIndexTask.class, task -> {
+        var renderMicronautWebsiteReleasesDocsIndex= tasks.register("renderReleasesDocsIndex", RenderMicronautWebsiteReleasesDocsIndexTask.class, task -> {
             task.setGroup(DOCUMENTATION_INDEX);
             task.setDescription("Renders every release version from releases.yml and copies the result to build/dist");
             task.getModules().convention(projectDirectory.file("modules.yml"));
@@ -76,7 +72,7 @@ public abstract class MicronautWebsiteDocsIndexPlugin implements Plugin<Project>
             task.getDestinationDirectory().convention(buildDirectory.dir("generated"));
             task.finalizedBy(copyAssets);
         });
-        tasks.findByName("build").dependsOn(renderDocsIndex, copyAssets);
+        tasks.findByName(TASK_BUILD).dependsOn(renderDocsIndex, copyAssets, renderMicronautWebsiteReleasesDocsIndex);
     }
 
     private String cleanupVersion(String version) {
