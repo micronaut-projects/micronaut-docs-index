@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2022 original authors
+ * Copyright 2017-2024 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,10 @@
  */
 package io.micronaut.website.docsindex;
 
-import java.io.IOException;
-import java.io.InputStream;
+@FunctionalInterface
+public interface VersionService {
 
-public abstract class VersionRendererImpl {
-    private final String template;
-    protected VersionRendererImpl(String name) throws IOException {
-        this.template = Utils.readFromURL(this.getClass()
-                .getClassLoader()
-                .getResource(name));
-    }
+    VersionService LATEST_VERSION_SERVICE = module -> "latest";
 
-    public String renderAsHtml(String version) {
-        return template.replaceAll("@version@", version);
-    }
+    String getReleaseVersion(Repository module);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2022 original authors
+ * Copyright 2017-2024 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public class CategoryFetchImpl implements CategoryFetcher {
     private static final String KEY_SLUG = "slug";
     private static final String KEY_DESCRIPTION = "description";
 
-    Map<Type, Category> typeToCategory = new HashMap<>();
+    private final Map<Type, Category> typeToCategory = new HashMap<>();
 
     public CategoryFetchImpl(File file) throws FileNotFoundException {
         this(new FileInputStream(file));
@@ -58,18 +58,15 @@ public class CategoryFetchImpl implements CategoryFetcher {
 
     public Optional<Category> byType(Map<String, Object> obj, Type type) {
         Object categoriesObj = obj.get(KEY_CATEGORIES);
-        if (categoriesObj instanceof Map) {
-            Map categoriesMap = (Map) categoriesObj;
+        if (categoriesObj instanceof Map categoriesMap) {
             Object categoryObj = categoriesMap.get(type.toString());
-            if (categoryObj instanceof Map) {
-                Map categoryMap = (Map) categoryObj;
+            if (categoryObj instanceof Map categoryMap) {
                 List<Repository> result = new ArrayList<>();
                 Object repositoriesObj = categoryMap.get(KEY_REPOSITORIES);
-                if (repositoriesObj instanceof Map) {
-                    for (Object repositoryObj : ((Map) repositoriesObj).values()) {
-                        if (repositoryObj instanceof Map) {
-                            Map repositoryMap = (Map) repositoryObj;
-                            result.add(new RepositoryImpl(
+                if (repositoriesObj instanceof Map repositoriesObjMap) {
+                    for (Object repositoryObj : repositoriesObjMap.values()) {
+                        if (repositoryObj instanceof Map repositoryMap) {
+                            result.add(new Repository(
                                     parseString(repositoryMap, KEY_SLUG),
                                     parseString(repositoryMap, KEY_TITLE),
                                     parseString(repositoryMap, KEY_DESCRIPTION),
@@ -78,7 +75,7 @@ public class CategoryFetchImpl implements CategoryFetcher {
                         }
                     }
                 }
-                return Optional.of(new CategoryImpl(
+                return Optional.of(new Category(
                         parseString(categoryMap, KEY_TITLE),
                         parseString(categoryMap, KEY_IMAGE),
                         result
@@ -98,7 +95,7 @@ public class CategoryFetchImpl implements CategoryFetcher {
 
     private static boolean parseBoolean(Map m, String k, boolean defaultValue) {
         Object obj = m.get(k);
-        if (obj != null && obj instanceof Boolean) {
+        if (obj instanceof Boolean) {
             return (boolean) obj;
         }
         return defaultValue;

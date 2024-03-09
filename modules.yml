@@ -154,12 +154,10 @@ categories:
         slug: 'micronaut-eclipsestore'
         title: 'Micronaut EclipseStore'
         description: 'Native Java object graph storage engine.'
-        snapshot: true            
       microstream:
         slug: 'micronaut-microstream'
         title: 'Micronaut Microstream'
         description: 'Native Java object graph storage engine.'
-        snapshot: true
       mongodb:
         slug: 'micronaut-mongodb'
         title: 'Micronaut MongoDB'
@@ -244,7 +242,6 @@ categories:
         slug: 'micronaut-chatbots'
         title: 'Micronaut Chatbots'
         description: 'Create Telegram, Slack, Google Chat Bots with the Micronaut Framework.'
-        snapshot: true        
       crac:
         slug: 'micronaut-crac'
         title: 'Micronaut Crac'
@@ -265,7 +262,6 @@ categories:
         slug: 'micronaut-session'
         title: 'Micronaut Session'
         description: 'Integration for HTTP sessions with the Micronaut Framework.'
-        snapshot: true
       upgrade:
         standard-docs: false
         slug: 'micronaut-upgrade'
@@ -332,7 +328,6 @@ categories:
         slug: 'micronaut-control-panel'
         title: 'Micronaut Control Panel'
         description: 'The Micronaut Control Panel module provides a web UI that allows you to view and manage the state of your Micronaut application, typically in a development environment'
-        snapshot: true
   most-popular:
     title: 'Most Popular'
     image: 'https://micronaut.io/wp-content/uploads/2023/08/mostpopular.svg'

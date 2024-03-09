@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2022 original authors
+ * Copyright 2017-2024 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,5 @@ package io.micronaut.website.docsindex;
 
 import java.util.List;
 
-public interface Category {
-    String getTitle();
-    List<Repository> getRepositories();
-    String getImage();
+public record Category(String title, String image, List<Repository> repositories) {
 }

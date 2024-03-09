@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2022 original authors
+ * Copyright 2017-2024 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,20 +20,66 @@ import org.gradle.api.Project;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.plugins.BasePlugin;
+import org.gradle.api.provider.Provider;
+import org.gradle.api.tasks.Copy;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public abstract class MicronautWebsiteDocsIndexPlugin implements Plugin<Project> {
+
+    private static final Pattern VERSION_PATTERN_CLEAN = Pattern.compile("^(?:v?)(\\d+\\.\\d+\\.\\d+)$");
+    private static final String DOCUMENTATION_INDEX = "Documentation Index";
+    public static final String LATEST_STABLE_RELEASE = "latestStableRelease";
+    public static final String TASK_BUILD = "build";
+
     @Override
     public void apply(Project project) {
         project.getPluginManager().apply(BasePlugin.class);
         TaskContainer tasks = project.getTasks();
-        DirectoryProperty buildDirectory = project.getLayout().getBuildDirectory();
-        Directory projectDirectory = project.getLayout().getProjectDirectory();
+        var layout = project.getLayout();
+
+        DirectoryProperty buildDirectory = layout.getBuildDirectory();
+        Directory projectDirectory = layout.getProjectDirectory();
+
+        Provider<String> micronautReleaseVersion = project
+                .getProviders()
+                .gradleProperty(LATEST_STABLE_RELEASE)
+                .map(this::cleanupVersion);
+
         TaskProvider<RenderMicronautWebsiteDocsIndexTask> renderDocsIndex = tasks.register("renderDocsIndex", RenderMicronautWebsiteDocsIndexTask.class, task -> {
+            task.setGroup(DOCUMENTATION_INDEX);
+            task.setDescription("Render the index.html, or a specific version if property  " + LATEST_STABLE_RELEASE + " is set");
             task.getModules().convention(projectDirectory.file("modules.yml"));
+            task.getReleaseVersion().set(micronautReleaseVersion);
             task.getDestinationFile().convention(buildDirectory.map(dir -> dir.file("index.html")));
         });
-        tasks.findByName("build").dependsOn(renderDocsIndex);
+        var copyAssets = tasks.register("copyAssets", Copy.class, task -> {
+            task.setGroup(DOCUMENTATION_INDEX);
+            task.setDescription("Copy assets and the generated html to the build/dist directory");
+            task.from(layout.getProjectDirectory().dir("assets"), copy -> copy.into("assets"));
+            task.from(layout.getBuildDirectory().dir("generated"));
+            task.into(layout.getBuildDirectory().dir("dist"));
+            task.mustRunAfter(renderDocsIndex);
+        });
+        var renderMicronautWebsiteReleasesDocsIndex= tasks.register("renderReleasesDocsIndex", RenderMicronautWebsiteReleasesDocsIndexTask.class, task -> {
+            task.setGroup(DOCUMENTATION_INDEX);
+            task.setDescription("Renders every release version from releases.yml and copies the result to build/dist");
+            task.getModules().convention(projectDirectory.file("modules.yml"));
+            task.getReleases().convention(projectDirectory.file("releases.yml"));
+            task.getDestinationDirectory().convention(buildDirectory.dir("generated"));
+            task.finalizedBy(copyAssets);
+        });
+        tasks.findByName(TASK_BUILD).dependsOn(renderDocsIndex, copyAssets, renderMicronautWebsiteReleasesDocsIndex);
+    }
+
+    private String cleanupVersion(String version) {
+        Matcher matcher = VERSION_PATTERN_CLEAN.matcher(version);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException("Invalid release version: '" + version + "'");
+        }
+        return matcher.group(1);
     }
 }

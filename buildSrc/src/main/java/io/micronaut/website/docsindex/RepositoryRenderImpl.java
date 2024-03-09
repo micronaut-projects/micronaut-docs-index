@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2022 original authors
+ * Copyright 2017-2024 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,37 @@
  */
 package io.micronaut.website.docsindex;
 
+import org.gradle.api.logging.Logger;
+
 import java.io.IOException;
 
 public class RepositoryRenderImpl implements RepositoryRenderer {
+
     private final String template;
-    public RepositoryRenderImpl() throws IOException {
-        this.template = Utils.readFromURL(this.getClass()
-                .getClassLoader()
-                .getResource("repository.html"));
+    private final Logger logger;
+    private final VersionService versionService;
+
+    public RepositoryRenderImpl(Logger logger, VersionService versionService) throws IOException {
+        this.logger = logger;
+        this.versionService = versionService;
+        try(var stream = this.getClass().getClassLoader().getResourceAsStream("repository.html")) {
+            this.template = new String(stream.readAllBytes());
+        }
     }
 
     @Override
     public String renderAsHtml(Repository repository) {
-        String version = repository.isSnapshot()  ? "snapshot" : "latest";
-        if (repository.isStandardDocs()) {
+        String version = repository.snapshot() ? "snapshot" : versionService.getReleaseVersion(repository);
+        if (version == null) {
+            logger.info("Skipping {} as no version found", repository.slug());
+            return "";
+        }
+        if (repository.standardDocs()) {
             version += "/guide";
         }
-        return template.replaceAll("@title@", repository.getTitle())
-                .replaceAll("@slug@", repository.getSlug())
-                .replaceAll("@description@", repository.getDescription())
+        return template.replaceAll("@title@", repository.title())
+                .replaceAll("@slug@", repository.slug())
+                .replaceAll("@description@", repository.description())
                 .replaceAll("@version@", version);
     }
 }

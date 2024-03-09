@@ -24,57 +24,66 @@ import io.micronaut.website.docsindex.VersionService;
 import io.micronaut.website.docsindex.VersionServiceImpl;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
+import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.CacheableTask;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.Optional;
+import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
 import org.gradle.api.tasks.TaskAction;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
 
 @CacheableTask
-public abstract class RenderMicronautWebsiteDocsIndexTask extends DefaultTask {
+public abstract class RenderMicronautWebsiteReleasesDocsIndexTask extends DefaultTask {
 
-    @Input
-    @Optional
-    public abstract Property<String> getReleaseVersion();
+    @InputFile
+    @PathSensitive(PathSensitivity.NONE)
+    public abstract RegularFileProperty getReleases();
 
     @InputFile
     @PathSensitive(PathSensitivity.NONE)
     public abstract RegularFileProperty getModules();
 
-    @OutputFile
-    public abstract RegularFileProperty getDestinationFile();
+    @OutputDirectory
+    public abstract DirectoryProperty getDestinationDirectory();
 
     @TaskAction
     void render() {
         try {
             File modulesFile = getModules().getAsFile().get();
-
-            VersionService versionService = getReleaseVersion()
-                    .map(v -> {
-                        getLogger().lifecycle("Rendering release {}.html to {}", v, getDestinationFile().get().getAsFile());
-                        return (VersionService) new VersionServiceImpl(v);
-                    })
-                    .getOrElse(VersionService.LATEST_VERSION_SERVICE);
-
-            IndexRenderer indexRenderer = new IndexRendererImpl(
-                    new CategoryRendererImpl(new RepositoryRenderImpl(getLogger(), versionService)),
-                    new CategoryFetchImpl(modulesFile),
-                    versionService,
-                    getReleaseVersion().getOrElse(null)
-            );
-            String html = indexRenderer.renderAsHtml();
-            try (FileOutputStream fos = new FileOutputStream(getDestinationFile().getAsFile().get())) {
-                fos.write(html.getBytes(StandardCharsets.UTF_8));
+            File releasesFile = getReleases().getAsFile().get();
+            try (var fis = new FileInputStream(releasesFile)) {
+                var yaml = new Yaml();
+                var obj = yaml.loadAs(fis, Map.class);
+                List<String> releases = (List<String>) obj.get("releases");
+                for (String release : releases) {
+                    getLogger().lifecycle("Rendering release {}.html to {}", release, getDestinationDirectory().get().getAsFile());
+                    VersionService versionService = new VersionServiceImpl(release);
+                    IndexRenderer indexRenderer = new IndexRendererImpl(
+                            new CategoryRendererImpl(new RepositoryRenderImpl(getLogger(), versionService)),
+                            new CategoryFetchImpl(modulesFile),
+                            versionService,
+                            release
+                    );
+                    String html = indexRenderer.renderAsHtml();
+                    File destinationFile = new File(getDestinationDirectory().get().getAsFile(), release + ".html");
+                    try (var fos = new FileOutputStream(destinationFile)) {
+                        fos.write(html.getBytes(StandardCharsets.UTF_8));
+                    }
+                }
             }
         } catch (IOException e) {
             throw new GradleException("IO Exception rendering index");
