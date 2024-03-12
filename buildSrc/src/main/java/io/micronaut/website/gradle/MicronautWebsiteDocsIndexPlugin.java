@@ -23,7 +23,6 @@ import org.gradle.api.plugins.BasePlugin;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Copy;
 import org.gradle.api.tasks.TaskContainer;
-import org.gradle.api.tasks.TaskProvider;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
