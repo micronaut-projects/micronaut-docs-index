@@ -49,6 +49,10 @@ import java.util.Map;
 @CacheableTask
 public abstract class RenderMicronautWebsiteReleasesDocsIndexTask extends DefaultTask {
 
+    @Input
+    @Optional
+    public abstract Property<String> getReleaseVersion();
+
     @InputFile
     @PathSensitive(PathSensitivity.NONE)
     public abstract RegularFileProperty getReleases();
@@ -71,22 +75,33 @@ public abstract class RenderMicronautWebsiteReleasesDocsIndexTask extends Defaul
                 List<String> releases = (List<String>) obj.get("releases");
                 for (String release : releases) {
                     getLogger().lifecycle("Rendering release {}.html to {}", release, getDestinationDirectory().get().getAsFile());
-                    VersionService versionService = new VersionServiceImpl(release);
-                    IndexRenderer indexRenderer = new IndexRendererImpl(
-                            new CategoryRendererImpl(new RepositoryRenderImpl(getLogger(), versionService)),
-                            new CategoryFetchImpl(modulesFile),
-                            versionService,
-                            release
-                    );
-                    String html = indexRenderer.renderAsHtml();
+                    String html = getHtml(release, modulesFile, releases);
                     File destinationFile = new File(getDestinationDirectory().get().getAsFile(), release + ".html");
                     try (var fos = new FileOutputStream(destinationFile)) {
                         fos.write(html.getBytes(StandardCharsets.UTF_8));
+                    }
+                    if (getReleaseVersion().isPresent() && release.equals(getReleaseVersion().get())) {
+                        File indexFile = new File(getDestinationDirectory().get().getAsFile(), "index.html");
+                        try (var fos = new FileOutputStream(indexFile)) {
+                            fos.write(html.getBytes(StandardCharsets.UTF_8));
+                        }
                     }
                 }
             }
         } catch (IOException e) {
             throw new GradleException("IO Exception rendering index");
         }
+    }
+
+    private String getHtml(String release, File modulesFile, List<String> releases) throws IOException {
+        VersionService versionService = new VersionServiceImpl(release);
+        IndexRenderer indexRenderer = new IndexRendererImpl(
+                new CategoryRendererImpl(new RepositoryRenderImpl(getLogger(), versionService)),
+                new CategoryFetchImpl(modulesFile),
+                versionService,
+                release,
+                releases
+        );
+        return indexRenderer.renderAsHtml();
     }
 }
