@@ -8,6 +8,6 @@ repositories {
 }
 
 dependencies {
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.16.1")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.17.0")
     implementation("org.yaml:snakeyaml:2.2")
 }
