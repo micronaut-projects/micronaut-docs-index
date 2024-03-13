@@ -23,7 +23,6 @@ import org.gradle.api.plugins.BasePlugin;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Copy;
 import org.gradle.api.tasks.TaskContainer;
-import org.gradle.api.tasks.TaskProvider;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -49,12 +48,13 @@ public abstract class MicronautWebsiteDocsIndexPlugin implements Plugin<Project>
                 .gradleProperty(LATEST_STABLE_RELEASE)
                 .map(this::cleanupVersion);
 
-        TaskProvider<RenderMicronautWebsiteDocsIndexTask> renderDocsIndex = tasks.register("renderDocsIndex", RenderMicronautWebsiteDocsIndexTask.class, task -> {
+        var renderMicronautWebsiteReleasesDocsIndex= tasks.register("renderReleasesDocsIndex", RenderMicronautWebsiteReleasesDocsIndexTask.class, task -> {
             task.setGroup(DOCUMENTATION_INDEX);
-            task.setDescription("Render the index.html, or a specific version if property  " + LATEST_STABLE_RELEASE + " is set");
+            task.setDescription("Renders every release version from releases.yml and copies the result to build/dist");
             task.getModules().convention(projectDirectory.file("modules.yml"));
+            task.getReleases().convention(projectDirectory.file("releases.yml"));
             task.getReleaseVersion().set(micronautReleaseVersion);
-            task.getDestinationFile().convention(buildDirectory.map(dir -> dir.file("index.html")));
+            task.getDestinationDirectory().convention(buildDirectory.dir("generated"));
         });
         var copyAssets = tasks.register("copyAssets", Copy.class, task -> {
             task.setGroup(DOCUMENTATION_INDEX);
@@ -62,17 +62,9 @@ public abstract class MicronautWebsiteDocsIndexPlugin implements Plugin<Project>
             task.from(layout.getProjectDirectory().dir("assets"), copy -> copy.into("assets"));
             task.from(layout.getBuildDirectory().dir("generated"));
             task.into(layout.getBuildDirectory().dir("dist"));
-            task.mustRunAfter(renderDocsIndex);
+            task.mustRunAfter(renderMicronautWebsiteReleasesDocsIndex);
         });
-        var renderMicronautWebsiteReleasesDocsIndex= tasks.register("renderReleasesDocsIndex", RenderMicronautWebsiteReleasesDocsIndexTask.class, task -> {
-            task.setGroup(DOCUMENTATION_INDEX);
-            task.setDescription("Renders every release version from releases.yml and copies the result to build/dist");
-            task.getModules().convention(projectDirectory.file("modules.yml"));
-            task.getReleases().convention(projectDirectory.file("releases.yml"));
-            task.getDestinationDirectory().convention(buildDirectory.dir("generated"));
-            task.finalizedBy(copyAssets);
-        });
-        tasks.findByName(TASK_BUILD).dependsOn(renderDocsIndex, copyAssets, renderMicronautWebsiteReleasesDocsIndex);
+        tasks.findByName(TASK_BUILD).dependsOn(renderMicronautWebsiteReleasesDocsIndex, copyAssets);
     }
 
     private String cleanupVersion(String version) {

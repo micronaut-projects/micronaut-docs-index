@@ -61,7 +61,7 @@ public class VersionServiceImpl implements VersionService {
 
     private VersionType versionType(String releaseVersion) {
         int major = Integer.parseInt(releaseVersion.split("\\.")[0]);
-        if (major < 2) {
+        if (major <= 2) {
             return VersionType.POM;
         } else if (major < 4) {
             return VersionType.CATALOG;

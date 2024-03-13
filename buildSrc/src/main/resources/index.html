@@ -401,7 +401,9 @@
 
                 <div class="inner">
                     <h1 class="title title_large first-word-bold first-word-break">Micronaut Documentation</h1>
-                    @platformVersion@
+                    Micronaut version <select id="version-select" onchange="document.location.href=this.value">
+                        @versionOptions@
+                    </select>
                 </div>
 
             </div>

@@ -16,6 +16,8 @@
 package io.micronaut.website.docsindex;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class IndexRendererImpl implements IndexRenderer {
 
@@ -24,27 +26,36 @@ public class IndexRendererImpl implements IndexRenderer {
     private final CategoryFetcher categoryFetcher;
     private final VersionService versionService;
     private final String platformVersion;
+    private final List<String> allVersions;
 
     public IndexRendererImpl(
             CategoryRenderer categoryRenderer,
             CategoryFetcher categoryFetcher,
             VersionService versionService,
-            String platformVersion
+            String platformVersion,
+            List<String> allVersions
     ) throws IOException {
         this.categoryRenderer = categoryRenderer;
         this.categoryFetcher = categoryFetcher;
         this.versionService = versionService;
         this.platformVersion = platformVersion;
+        this.allVersions = allVersions;
         try (var stream = this.getClass().getClassLoader().getResourceAsStream("index.html")) {
             this.template = new String(stream.readAllBytes());
         }
+    }
+
+    private String versionToOption(String version) {
+        String selected = platformVersion != null && platformVersion.equals(version) ? " selected" : "";
+        return """
+                <option%s value="%s.html">%s</option>""".formatted(selected, version, version);
     }
 
     @Override
     public String renderAsHtml() {
         return template
                 .replaceAll("@version@", versionService.getReleaseVersion(new Repository("micronaut-core", null, null, false, true)))
-                .replaceAll("@platformVersion@", platformVersion == null ? "" : "v" + platformVersion)
+                .replaceAll("@versionOptions@", allVersions.stream().map(this::versionToOption).collect(Collectors.joining()))
                 .replaceAll("@analytics@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.ANALYTICS).orElseThrow()))
                 .replaceAll("@api@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.API).orElseThrow()))
                 .replaceAll("@build@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.BUILD).orElseThrow()))

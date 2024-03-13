@@ -364,7 +364,6 @@ categories:
         slug: 'micronaut-validation'
         title: 'Micronaut Validation'
         description: 'Validation support for Micronaut.'
-        snapshot: true
       hibernate-validator:
         slug: 'micronaut-hibernate-validator'
         title: 'Micronaut Hibernate Validator'
