@@ -18,7 +18,6 @@ categories:
       opensearch:
         slug: 'micronaut-opensearch'
         title: 'Micronaut OpenSearch'
-        snapshot: true        
         description: 'Configuration to integrate Micronaut framework and OpenSearch'        
   api:
     title: 'API'
