@@ -39,6 +39,10 @@ categories:
         slug: 'micronaut-jaxrs'
         title: 'Micronaut JAX-RS'
         description: 'Support for using JAX-RS annotations and types in a Micronaut application'
+      json-schema:
+        slug: 'micronaut-json-schema'
+        title: 'Micronaut JSON Schema'
+        description: 'Configuration to integrate Micronaut and JSON Schema'        
       openapi:
         slug: 'micronaut-openapi'
         title: 'Micronaut Open API'
