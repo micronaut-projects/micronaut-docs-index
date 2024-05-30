@@ -31,6 +31,10 @@ categories:
         slug: 'micronaut-grpc'
         title: 'Micronaut GRPC'
         description: 'Integration between Micronaut and GRPC'
+      guice:
+        slug: 'micronaut-guice'
+        title: 'Micronaut Guice'
+        description: 'Allows Importing Guice Modules into Micronaut'        
       jackson-xml:
         slug: 'micronaut-jackson-xml'
         title: 'Micronaut Jackson XML'
