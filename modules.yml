@@ -89,7 +89,7 @@ categories:
         slug: 'micronaut-starter'
         title: 'Micronaut Launch Documentation'
         description: 'Generates Micronaut applications.'
-     starter:
+      sourcegen:
         slug: 'micronaut-sourcegen'
         title: 'Micronaut SourceGen'
         description: 'Cross Language Source Generation APIs.'        
