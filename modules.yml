@@ -145,6 +145,10 @@ categories:
         slug: 'micronaut-toml'
         title: 'Micronaut TOML'
         description: 'Micronaut TOML is the TOML configuration adapter for the Micronaut Framework.'
+      logging:
+        slug: 'micronaut-logging'
+        title: 'Micronaut Logging'
+        description: 'Micronaut Logging publishes a BOM (Bill of materials) for logging dependencies (e.g., Logback).'
   data-access:
     title: 'Data Access'
     image: 'https://micronaut.io/wp-content/uploads/2020/11/dataaccess.svg'
