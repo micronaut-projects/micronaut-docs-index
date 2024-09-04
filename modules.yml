@@ -213,6 +213,11 @@ categories:
         slug: 'micronaut-kotlin'
         title: 'Micronaut Kotlin'
         description: 'Integrations between Micronaut and Kotlin and Ktor.'
+      graal:
+        snapshot: true
+        slug: 'micronaut-graal-languages'
+        title: 'Micronaut Graal Languages'
+        description: 'Integrate Graal based dynamic languages with Micronaut Framework'        
   messaging:
     title: 'Messaging'
     image: 'https://micronaut.io/wp-content/uploads/2020/11/Messaging.svg'
