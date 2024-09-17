@@ -214,7 +214,6 @@ categories:
         title: 'Micronaut Kotlin'
         description: 'Integrations between Micronaut and Kotlin and Ktor.'
       graal:
-        snapshot: true
         slug: 'micronaut-graal-languages'
         title: 'Micronaut Graal Languages'
         description: 'Integrate Graal based dynamic languages with Micronaut Framework'        
