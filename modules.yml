@@ -93,6 +93,11 @@ categories:
         slug: 'micronaut-sourcegen'
         title: 'Micronaut SourceGen'
         description: 'Cross Language Source Generation APIs.'        
+      sourcegen:
+        slug: 'micronaut-build-plugin-sourcegen'
+        title: 'Micronaut Build Plugin SourceGen'
+        description: 'A sourcegen-based project for generating Maven and Gradle plugin source'
+        snapshot: true
   cloud:
     image: 'https://micronaut.io/wp-content/uploads/2020/11/cloud.svg'
     title: 'Cloud'
