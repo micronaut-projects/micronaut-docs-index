@@ -98,6 +98,11 @@ categories:
         title: 'Micronaut Build Plugin SourceGen'
         description: 'A sourcegen-based project for generating Maven and Gradle plugin source'
         snapshot: true
+      projectgen:
+        slug: 'micronaut-projectgen'
+        title: 'Micronaut ProjectGen'
+        description: 'API to generating Maven and Gradle projects'
+        snapshot: true        
   cloud:
     image: 'https://micronaut.io/wp-content/uploads/2020/11/cloud.svg'
     title: 'Cloud'
