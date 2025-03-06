@@ -93,7 +93,7 @@ categories:
         slug: 'micronaut-sourcegen'
         title: 'Micronaut SourceGen'
         description: 'Cross Language Source Generation APIs.'        
-      sourcegen:
+      buildsourcegen:
         slug: 'micronaut-build-plugin-sourcegen'
         title: 'Micronaut Build Plugin SourceGen'
         description: 'A sourcegen-based project for generating Maven and Gradle plugin source'
