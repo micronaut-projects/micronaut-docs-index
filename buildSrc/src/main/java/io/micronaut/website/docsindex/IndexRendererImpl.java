@@ -48,7 +48,27 @@ public class IndexRendererImpl implements IndexRenderer {
     private String versionToOption(String version) {
         String selected = platformVersion != null && platformVersion.equals(version) ? " selected" : "";
         return """
-                <option%s value="%s.html">%s</option>""".formatted(selected, version, version);
+                <option%s value="%s">%s</option>""".formatted(selected, href(version), version);
+    }
+
+    private static String href(String version) {
+        if (version.startsWith("4.0") ||
+                version.startsWith("4.1") ||
+                version.startsWith("4.2") ||
+                version.startsWith("4.3") ||
+                version.startsWith("4.4") ||
+                version.startsWith("4.5") ||
+                version.startsWith("4.6") ||
+                version.startsWith("4.7")) {
+            return "https://micronaut-projects.github.io/micronaut-docs-mn4/" + version + ".html";
+        } else if (version.startsWith("3.")) {
+            return "https://micronaut-projects.github.io/micronaut-docs-mn3/" + version + ".html";
+        } else if (version.startsWith("2.")) {
+            return "https://micronaut-projects.github.io/micronaut-docs-mn2/" + version + ".html";
+        } else if (version.startsWith("1.")) {
+            return "https://micronaut-projects.github.io/micronaut-docs-mn1/" + version + ".html";
+        }
+        return version + ".html";
     }
 
     @Override
