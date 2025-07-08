@@ -23,6 +23,10 @@ categories:
     title: 'API'
     image: 'https://micronaut.io/wp-content/uploads/2020/11/API.svg'
     repositories:
+      langchain4j:
+        slug: 'micronaut-langchain4j'
+        title: 'Micronaut Langchain4j'
+        description: 'Integration between Micronaut and Langchain4j'
       graphql:
         slug: 'micronaut-graphql'
         title: 'Micronaut GraphQL'
