@@ -48,10 +48,10 @@ public class IndexRendererImpl implements IndexRenderer {
     private String versionToOption(String version) {
         String selected = platformVersion != null && platformVersion.equals(version) ? " selected" : "";
         return """
-                <option%s value="%s">%s</option>""".formatted(selected, href(version), version);
+                <option%s value="%s.html">%s</option>""".formatted(selected, version, version);
     }
 
-    private static String href(String version) {
+    private static String coreDomain(String version) {
         if (version.startsWith("4.0") ||
                 version.startsWith("4.1") ||
                 version.startsWith("4.2") ||
@@ -60,21 +60,23 @@ public class IndexRendererImpl implements IndexRenderer {
                 version.startsWith("4.5") ||
                 version.startsWith("4.6") ||
                 version.startsWith("4.7")) {
-            return "https://micronaut-projects.github.io/micronaut-docs-mn4/" + version + ".html";
+            return "https://micronaut-projects.github.io/micronaut-docs-mn4";
         } else if (version.startsWith("3.")) {
-            return "https://micronaut-projects.github.io/micronaut-docs-mn3/" + version + ".html";
+            return "https://micronaut-projects.github.io/micronaut-docs-mn3";
         } else if (version.startsWith("2.")) {
-            return "https://micronaut-projects.github.io/micronaut-docs-mn2/" + version + ".html";
+            return "https://micronaut-projects.github.io/micronaut-docs-mn2";
         } else if (version.startsWith("1.")) {
-            return "https://micronaut-projects.github.io/micronaut-docs-mn1/" + version + ".html";
+            return "https://micronaut-projects.github.io/micronaut-docs-mn1";
         }
-        return version + ".html";
+        return "https://docs.micronaut.io";
     }
 
     @Override
     public String renderAsHtml() {
+        String coreVersion = versionService.getReleaseVersion(new Repository("micronaut-core", null, null, false, true));
         return template
-                .replaceAll("@version@", versionService.getReleaseVersion(new Repository("micronaut-core", null, null, false, true)))
+                .replaceAll("@coreDomain@", coreDomain(coreVersion))
+                .replaceAll("@version@", coreVersion)
                 .replaceAll("@versionOptions@", allVersions.stream().map(this::versionToOption).collect(Collectors.joining()))
                 .replaceAll("@analytics@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.ANALYTICS).orElseThrow()))
                 .replaceAll("@api@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.API).orElseThrow()))
@@ -92,6 +94,5 @@ public class IndexRendererImpl implements IndexRenderer {
                 .replaceAll("@dev-and-test@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.DEV_AND_TEST).orElseThrow()))
                 .replaceAll("@most-popular@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.MOST_POPULAR).orElseThrow()))
                 .replaceAll("@validation@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.VALIDATION).orElseThrow()));
-
     }
 }
