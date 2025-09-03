@@ -23,10 +23,6 @@ categories:
     title: 'API'
     image: 'https://micronaut.io/wp-content/uploads/2020/11/API.svg'
     repositories:
-      langchain4j:
-        slug: 'micronaut-langchain4j'
-        title: 'Micronaut Langchain4j'
-        description: 'Integration between Micronaut and Langchain4j'
       graphql:
         slug: 'micronaut-graphql'
         title: 'Micronaut GraphQL'
@@ -389,6 +385,19 @@ categories:
         slug: 'micronaut-openapi'
         title: 'Micronaut Open API'
         description: 'Configuration to integrate Micronaut and OpenAPI/Swagger'
+  ai:
+    title: 'AI'
+    image: 'https://micronaut.io/wp-content/uploads/2025/09/ai.svg'
+    repositories:
+      langchain4j:
+        slug: 'micronaut-langchain4j'
+        title: 'Micronaut Langchain4j'
+        description: 'Integration between Micronaut and Langchain4j'
+      mcp:
+        slug: 'micronaut-mcp'
+        title: 'Micronaut MCP'
+        snapshot: true        
+        description: 'Support for Model Context Protocol'
   validation:
     title: 'Validation'
     image: 'https://micronaut.io/wp-content/uploads/2023/08/validation.svg'
