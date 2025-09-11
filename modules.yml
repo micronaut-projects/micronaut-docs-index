@@ -98,6 +98,11 @@ categories:
         title: 'Micronaut Build Plugin SourceGen'
         description: 'A sourcegen-based project for generating Maven and Gradle plugin source'
         snapshot: true
+      openrewrite:
+        snapshot: true
+        slug: 'micronaut-openrewrite'
+        title: 'Micronaut OpenRewrite'
+        description: 'OpenRewrite recipes for Micronaut'        
       projectgen:
         slug: 'micronaut-projectgen'
         title: 'Micronaut ProjectGen'
