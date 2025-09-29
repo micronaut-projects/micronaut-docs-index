@@ -17,6 +17,7 @@ package io.micronaut.website.docsindex;
 
 public enum Type {
     ANALYTICS("analytics"),
+    AI("ai"),
     API("api"),
     BUILD("build"),
     CLOUD("cloud"),
