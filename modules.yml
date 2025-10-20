@@ -55,6 +55,11 @@ categories:
         slug: 'micronaut-serialization'
         title: 'Micronaut Serialization'
         description: 'Enables serialization/deserialization in Micronaut applications using build time information'
+      avro:
+        slug: 'micronaut-avro'
+        title: 'Micronaut Avro'
+        description: 'Integration with Apache Avro'
+        snapshot: true
       servlet:
         slug: 'micronaut-servlet'
         title: 'Micronaut Servlet'
