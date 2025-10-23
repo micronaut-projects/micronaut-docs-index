@@ -52,14 +52,14 @@ public class IndexRendererImpl implements IndexRenderer {
     }
 
     private static String coreDomain(String version) {
-        if (version.startsWith("4.0") ||
-                version.startsWith("4.1") ||
-                version.startsWith("4.2") ||
-                version.startsWith("4.3") ||
-                version.startsWith("4.4") ||
-                version.startsWith("4.5") ||
-                version.startsWith("4.6") ||
-                version.startsWith("4.7")) {
+        if (version.startsWith("4.0.") ||
+                version.startsWith("4.1.") ||
+                version.startsWith("4.2.") ||
+                version.startsWith("4.3.") ||
+                version.startsWith("4.4.") ||
+                version.startsWith("4.5.") ||
+                version.startsWith("4.6.") ||
+                version.startsWith("4.7.")) {
             return "https://micronaut-projects.github.io/micronaut-docs-mn4";
         } else if (version.startsWith("3.")) {
             return "https://micronaut-projects.github.io/micronaut-docs-mn3";
