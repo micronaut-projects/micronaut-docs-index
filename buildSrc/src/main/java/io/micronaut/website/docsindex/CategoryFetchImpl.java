@@ -34,6 +34,7 @@ public class CategoryFetchImpl implements CategoryFetcher {
     private static final String KEY_REPOSITORIES = "repositories";
     private static final String KEY_CATEGORIES = "categories";
     private static final String KEY_SLUG = "slug";
+    private static final String KEY_URL = "url";
     private static final String KEY_DESCRIPTION = "description";
 
     private final Map<Type, Category> typeToCategory = new HashMap<>();
@@ -71,7 +72,8 @@ public class CategoryFetchImpl implements CategoryFetcher {
                                     parseString(repositoryMap, KEY_TITLE),
                                     parseString(repositoryMap, KEY_DESCRIPTION),
                                     parseBoolean(repositoryMap, "snapshot", false),
-                                    parseBoolean(repositoryMap, "standard-docs", true)));
+                                    parseBoolean(repositoryMap, "standard-docs", true),
+                                    parseString(repositoryMap, KEY_URL)));
                         }
                     }
                 }

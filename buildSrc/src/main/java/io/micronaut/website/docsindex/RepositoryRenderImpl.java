@@ -43,9 +43,13 @@ public class RepositoryRenderImpl implements RepositoryRenderer {
         if (repository.standardDocs()) {
             version += "/guide";
         }
+        String url = repository.url() != null ?
+                repository.url() :
+                "https://micronaut-projects.github.io/@slug@/@version@"
+                        .replaceAll("@slug@", repository.slug())
+                        .replaceAll("@version@", version);
         return template.replaceAll("@title@", repository.title())
-                .replaceAll("@slug@", repository.slug())
-                .replaceAll("@description@", repository.description())
-                .replaceAll("@version@", version);
+                .replaceAll("@url@", url)
+                .replaceAll("@description@", repository.description());
     }
 }

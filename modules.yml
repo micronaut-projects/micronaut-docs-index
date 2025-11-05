@@ -367,6 +367,25 @@ categories:
         slug: 'micronaut-control-panel'
         title: 'Micronaut Control Panel'
         description: 'The Micronaut Control Panel module provides a web UI that allows you to view and manage the state of your Micronaut application, typically in a development environment'
+  ide:
+    title: 'IDE'
+    image: 'https://micronaut.io/wp-content/uploads/2021/01/MicronautTraining.svg'
+    repositories:
+      intellij-idea-micronaut:
+        standard-docs: false
+        url: 'https://www.jetbrains.com/help/idea/micronaut.html'
+        title: 'Micronaut IntelliJ IDEA'
+        description: 'Micronaut support within IntelliJ IDEA'
+      vs-code-tools-for-micronaut:
+        standard-docs: false
+        url: 'https://marketplace.visualstudio.com/items?itemName=oracle-labs-graalvm.micronaut-tools'
+        title: 'VS Code Tools for Micronaut'
+        description: 'VS Code extension to develop Micronaut applications within VS Code'
+      vs-code-launch-for-micronaut:
+        standard-docs: false
+        url: 'https://marketplace.visualstudio.com/items?itemName=oracle-labs-graalvm.micronaut'
+        title: 'VS Code Micronaut Launch'
+        description: 'VS Code extension for creating Micronaut framework applications within VS Code'
   most-popular:
     title: 'Most Popular'
     image: 'https://micronaut.io/wp-content/uploads/2023/08/mostpopular.svg'

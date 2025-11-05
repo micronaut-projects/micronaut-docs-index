@@ -15,5 +15,11 @@
  */
 package io.micronaut.website.docsindex;
 
-public record Repository(String slug, String title, String description, boolean snapshot, boolean standardDocs) {
+public record Repository(
+        String slug,
+        String title,
+        String description,
+        boolean snapshot,
+        boolean standardDocs,
+        String url) {
 }
