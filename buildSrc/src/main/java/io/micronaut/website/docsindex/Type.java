@@ -25,6 +25,7 @@ public enum Type {
     DATA_ACCESS("data-access"),
     DATABASE_MIGRATION("database-migration"),
     ERRORS("errors"),
+    IDE("ide"),
     LANGUAGES("languages"),
     MESSAGING("messaging"),
     MISC("misc"),

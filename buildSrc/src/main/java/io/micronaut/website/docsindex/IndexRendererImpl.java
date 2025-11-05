@@ -73,7 +73,7 @@ public class IndexRendererImpl implements IndexRenderer {
 
     @Override
     public String renderAsHtml() {
-        String coreVersion = versionService.getReleaseVersion(new Repository("micronaut-core", null, null, false, true));
+        String coreVersion = versionService.getReleaseVersion(new Repository("micronaut-core", null, null, false, true, null));
         return template
                 .replaceAll("@coreDomain@", coreDomain(coreVersion))
                 .replaceAll("@version@", coreVersion)
@@ -92,6 +92,7 @@ public class IndexRendererImpl implements IndexRenderer {
                 .replaceAll("@reactive@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.REACTIVE).orElseThrow()))
                 .replaceAll("@views@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.VIEWS).orElseThrow()))
                 .replaceAll("@dev-and-test@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.DEV_AND_TEST).orElseThrow()))
+                .replaceAll("@ide@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.IDE).orElseThrow()))
                 .replaceAll("@most-popular@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.MOST_POPULAR).orElseThrow()))
                 .replaceAll("@ai@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.AI).orElseThrow()))
                 .replaceAll("@validation@", categoryRenderer.renderAsHtml(categoryFetcher.fetch(Type.VALIDATION).orElseThrow()));
