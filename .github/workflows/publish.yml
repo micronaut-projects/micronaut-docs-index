@@ -40,4 +40,4 @@ jobs:
           TARGET_REPOSITORY: "micronaut-projects/micronaut-docs"
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build/docs
+          FOLDER: build/dist
