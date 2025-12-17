@@ -41,4 +41,4 @@ jobs:
           folder: build/dist
           repository-name: "micronaut-projects/micronaut-docs"
           clean: false
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GH_TOKEN_REPO_SCOPE }}
