@@ -34,11 +34,10 @@ jobs:
           GRADLE_ENTERPRISE_CACHE_USERNAME: ${{ secrets.GRADLE_ENTERPRISE_CACHE_USERNAME }}
           GRADLE_ENTERPRISE_CACHE_PASSWORD: ${{ secrets.GRADLE_ENTERPRISE_CACHE_PASSWORD }}
 
-      - name: Publish to Github Pages
-        uses: JamesIves/github-pages-deploy-action@v4.7.6
-        with:
-          branch: gh-pages
-          folder: build/dist
-          repository-name: "micronaut-projects/micronaut-docs"
-          clean: false
-          token: ${{ secrets.GH_TOKEN_DOCS }}
+      - name: "📑 Publish to Github Pages"
+        uses: micronaut-projects/github-pages-deploy-action@master
+        env:
+          TARGET_REPOSITORY: "micronaut-projects/micronaut-docs"
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build/docs
