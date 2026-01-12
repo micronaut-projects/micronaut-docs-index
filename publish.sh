@@ -1,0 +1,95 @@
+#!/bin/bash
+
+set -e
+
+if [ -z "$GH_TOKEN" ]
+then
+  echo "You must provide the action with a GitHub Personal Access Token secret in order to deploy."
+  exit 1
+fi
+
+if [ -z "$BRANCH" ]
+then
+  echo "You must provide the action with a branch name it should deploy to, for example gh-pages or docs."
+  exit 1
+fi
+
+if [ -z "$DOC_FOLDER" ];
+then
+  DOC_FOLDER=$BRANCH
+fi
+
+if [ -z "$FOLDER" ]
+then
+  echo "You must provide the action with the folder name in the repository where your compiled page lives."
+  exit 1
+fi
+
+case "$FOLDER" in /*|./*)
+  echo "The deployment folder cannot be prefixed with '/' or './'. Instead reference the folder name directly."
+  exit 1
+esac
+
+if [ -z "$COMMIT_EMAIL" ]
+then
+  COMMIT_EMAIL="${GITHUB_ACTOR}@users.noreply.github.com"
+fi
+
+if [ -z "$COMMIT_NAME" ]
+then
+  COMMIT_NAME="${GITHUB_ACTOR}"
+fi
+if [ -z "$TARGET_REPOSITORY" ]
+then
+  TARGET_REPOSITORY="${GITHUB_REPOSITORY}"
+fi
+
+# Directs the action to the the Github workspace.
+cd $GITHUB_WORKSPACE && \
+
+# Configures Git.
+git init && \
+git config --global user.email "${COMMIT_EMAIL}" && \
+git config --global user.name "${COMMIT_NAME}" && \
+
+git config --global http.version HTTP/1.1
+git config --global http.postBuffer 157286400
+
+## Initializes the repository path using the access token.
+REPOSITORY_PATH="https://${GH_TOKEN}@github.com/${TARGET_REPOSITORY}.git" && \
+
+# Checks to see if the remote exists prior to deploying.
+# If the branch doesn't exist it gets created here as an orphan.
+if [ "$(git ls-remote --heads "$REPOSITORY_PATH" "$BRANCH" | wc -l)" -eq 0 ];
+then
+  echo "Creating remote branch ${BRANCH} as it doesn't exist..."
+  mkdir $DOC_FOLDER && \
+  cd $DOC_FOLDER && \
+  git init && \
+  git checkout -b $BRANCH && \
+  git remote add origin $REPOSITORY_PATH && \
+  touch README.md && \
+  git add README.md && \
+  git commit -m "Initial ${BRANCH} commit" && \
+  git push $REPOSITORY_PATH $BRANCH
+else
+  ## Clone the target repository
+  git clone "$REPOSITORY_PATH" $DOC_FOLDER --branch $BRANCH --single-branch && \
+  cd $DOC_FOLDER
+fi
+
+# Builds the project if a build script is provided.
+echo "Running build scripts... $BUILD_SCRIPT" && \
+eval "$BUILD_SCRIPT" && \
+
+if [ -n "$CNAME" ]; then
+  echo "Generating a CNAME file in in the $PWD directory..."
+  echo $CNAME > CNAME
+  git add CNAME
+fi
+
+cp -r "../$FOLDER/*" .
+
+git commit -m "Deploying to ${BRANCH} - $(date +"%T")" --quiet && \
+git push "https://$GITHUB_ACTOR:$GH_TOKEN@github.com/$TARGET_REPOSITORY.git" gh-pages || true && \
+echo "Deployment successful!"

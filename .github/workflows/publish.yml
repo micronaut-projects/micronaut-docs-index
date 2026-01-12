@@ -35,7 +35,7 @@ jobs:
           GRADLE_ENTERPRISE_CACHE_PASSWORD: ${{ secrets.GRADLE_ENTERPRISE_CACHE_PASSWORD }}
 
       - name: "📑 Publish to Github Pages"
-        uses: micronaut-projects/github-pages-deploy-action@master
+        run: ./publish.sh
         env:
           TARGET_REPOSITORY: "micronaut-projects/micronaut-docs"
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
