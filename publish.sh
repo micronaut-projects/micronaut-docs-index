@@ -88,7 +88,7 @@ if [ -n "$CNAME" ]; then
   git add CNAME
 fi
 
-cp -r "../$FOLDER/*" .
+cp -r "../$FOLDER/." .
 
 git commit -m "Deploying to ${BRANCH} - $(date +"%T")" --quiet && \
 git push "https://$GITHUB_ACTOR:$GH_TOKEN@github.com/$TARGET_REPOSITORY.git" gh-pages || true && \
