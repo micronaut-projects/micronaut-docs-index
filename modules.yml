@@ -175,10 +175,6 @@ categories:
         slug: 'micronaut-eclipsestore'
         title: 'Micronaut EclipseStore'
         description: 'Native Java object graph storage engine.'
-      microstream:
-        slug: 'micronaut-microstream'
-        title: 'Micronaut Microstream'
-        description: 'Native Java object graph storage engine.'
       mongodb:
         slug: 'micronaut-mongodb'
         title: 'Micronaut MongoDB'
