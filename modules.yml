@@ -297,10 +297,6 @@ categories:
         slug: 'micronaut-reactor'
         title: 'Micronaut Reactor'
         description: 'Project Reactor compatible HTTP Client. Converters and Instrumentation for Project Reactor types.'
-      rxjava2:
-        slug: 'micronaut-rxjava2'
-        title: 'Micronaut RxJava 2'
-        description: 'Converters and Instrumentation for RxJava 2 types. RxJava 2 compatible HTTP Client.'
       rxjava3:
         slug: 'micronaut-rxjava3'
         title: 'Micronaut RxJava 3'
