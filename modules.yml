@@ -131,10 +131,6 @@ categories:
         slug: 'micronaut-kubernetes'
         title: 'Micronaut Kubernetes'
         description: 'Integration between Micronaut and Kubernetes'
-      netflix:
-        slug: 'micronaut-netflix'
-        title: 'Micronaut Netflix'
-        description: 'Integration between Micronaut and Netflix OSS'
       oracle:
         slug: 'micronaut-oracle-cloud'
         title: 'Micronaut Oracle Cloud'
