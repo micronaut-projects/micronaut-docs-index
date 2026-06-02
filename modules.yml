@@ -397,10 +397,6 @@ categories:
         slug: 'micronaut-graphql'
         title: 'Micronaut GraphQL'
         description: 'Extensions to integrate Micronaut and GraphQL'
-      spring:
-        slug: 'micronaut-spring'
-        title: 'Micronaut Spring'
-        description: 'Extensions to integrate Micronaut and Spring'
       kafka:
         slug: 'micronaut-kafka'
         title: 'Micronaut Kafka'
