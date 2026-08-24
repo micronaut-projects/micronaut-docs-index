@@ -215,6 +215,11 @@ categories:
         slug: 'micronaut-graal-languages'
         title: 'Micronaut Graal Languages'
         description: 'Integrate Graal based dynamic languages with Micronaut Framework'        
+      jakarta-el:
+        snapshot: true
+        slug: 'micronaut-jakarta-el'
+        title: 'Micronaut Jakarta EL'
+        description: 'A Jakarta Expression Language implementation whose expressions and resolvers are generated at compilation time'
   messaging:
     title: 'Messaging'
     image: 'https://micronaut.io/wp-content/uploads/2020/11/Messaging.svg'
