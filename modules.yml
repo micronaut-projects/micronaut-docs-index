@@ -55,6 +55,11 @@ categories:
         slug: 'micronaut-serialization'
         title: 'Micronaut Serialization'
         description: 'Enables serialization/deserialization in Micronaut applications using build time information'
+      el:
+        slug: 'micronaut-jakarta-el'
+        title: 'Micronaut Jakarta EL'
+        snapshot: true
+        description: 'Jakarta Expression Language implementation compiled at compilation time'        
       servlet:
         slug: 'micronaut-servlet'
         title: 'Micronaut Servlet'
